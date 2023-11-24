@@ -11,12 +11,12 @@ export default class SettingService extends Service<Setting> {
   public async initData() {
     const datas = await this.getDatas()
     const localeValues = Object.values(Locale)
-    const newFilterDatas = localeValues.filter(locale => {
-      return datas.some(data => data.locale !== locale)
+    const newLocaleValues = localeValues.filter(locale => {
+      return !datas.some(data => data.locale === locale)
     })
-    if (newFilterDatas.length === 0) return
+    if (newLocaleValues.length === 0) return
 
-    const newDatas = newFilterDatas.map(locale => {
+    const newDatas = newLocaleValues.map(locale => {
       const setting = WrapDataManager.toSetting({
         locale,
         isSet: false

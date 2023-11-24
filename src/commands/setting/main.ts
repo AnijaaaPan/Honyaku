@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder, LocaleString } from 'discord.js'
 import { BUTTON_OFF, BUTTON_ON } from '~/constants/buttons'
 import { CUSTOM_IDS } from '~/constants/ids'
-import { client } from '~/index'
+import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/futures/generals'
 import { Setting } from '~/interfaces/redis/ISetting'
 import WrapDataManager from '~/managers/generals/WrapDataManager'
 import SettingService from '~/services/SettingService'
@@ -14,13 +14,16 @@ export default class SettingCommand extends BaseCommandManager {
   private _maxIndex = 0
 
   protected async main() {
-    this._settings = await this._service.getDatas()
-    this._maxIndex = this._settings.length - 1
-
-    await this.waitPushButton()
+    await this.resetSetting()
+    await this._pushButtonLogic()
   }
 
-  public async waitPushButton() {
+  private async resetSetting() {
+    this._settings = await this._service.getDatas()
+    this._maxIndex = this._settings.length - 1
+  }
+
+  private async _pushButtonLogic() {
     const { channel, userId } = this.commandManager
     const messageOptions = this._generateMessage()
     const interactionReplyOptions = WrapDataManager.toInteractionReplyOptions({
@@ -40,19 +43,36 @@ export default class SettingCommand extends BaseCommandManager {
     })
 
     collector?.on('collect', async (i) => {
-      if (i.customId === CUSTOM_IDS.PAGE_INITIAL) {
+      if (i.customId === CUSTOM_IDS.TOP) {
         this._nowIndex = 0
-      } else if (i.customId === CUSTOM_IDS.PAGE_BACK) {
+      } else if (i.customId === CUSTOM_IDS.UP) {
         this._nowIndex--
-      } else if (i.customId === CUSTOM_IDS.PAGE_NEXT) {
+      } else if (i.customId === CUSTOM_IDS.DOWN) {
         this._nowIndex++
-      } else if (i.customId === CUSTOM_IDS.PAGE_END) {
+      } else if (i.customId === CUSTOM_IDS.BOTTOM) {
         this._nowIndex = this._maxIndex
-      } else { }
+      } else {
+        await this._updateIsSet(i.customId)
+      }
 
       const messageOptions = this._generateMessage()
       await i.update(messageOptions)
     })
+  }
+
+  private async _updateIsSet(customId: string) {
+    switch (customId) {
+      case CUSTOM_IDS.ON:
+        this._settings[this._nowIndex].isSet = true
+        break
+
+      case CUSTOM_IDS.OFF:
+        this._settings[this._nowIndex].isSet = false
+        break
+    }
+
+    await this._service.saveData(this._settings)
+    await this.resetSetting()
   }
 
   private _generateMessage() {
@@ -65,8 +85,8 @@ export default class SettingCommand extends BaseCommandManager {
 
     topButton.setDisabled(this._nowIndex === 0)
     upButton.setDisabled(this._nowIndex === 0)
-    downButton.setDisabled(this._nowIndex !== 0)
-    bottomButton.setDisabled(this._nowIndex !== 0)
+    downButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._maxIndex)
+    bottomButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._maxIndex)
 
     const messageOptions = WrapDataManager.toMessageOptions({
       components: [
@@ -84,7 +104,6 @@ export default class SettingCommand extends BaseCommandManager {
     const description = this._generateDescription()
     const embed = new EmbedBuilder()
     embed.setTitle(i18n.commands.language.embed.title)
-    embed.setThumbnail(client.user?.avatarURL() ?? '')
     embed.setDescription(description)
     return embed
   }
@@ -92,129 +111,22 @@ export default class SettingCommand extends BaseCommandManager {
   private _generateDescription() {
     const contents = this._settings.map((setting, index) => {
       const { isSet, locale } = setting
-      const nowEmoji = this._nowEmoji(index)
-      const onOffEmoji = this._onOffEmoji(isSet)
-      const localeName = this._getLocaleName(locale)
+      const nowEmoji = this._getNowEmoji(index)
+      const onOffEmoji = getOnOffEmoji(isSet)
+      const flagEmoji = getFlagEmoji(locale)
+      const localeName = getLocaleName(locale)
       const localizedName = this._getLocalizedName(locale)
-      const flagEmoji = this._getFlagEmoji(locale)
-      return `**${nowEmoji} ${onOffEmoji}: \`${localeName} ${localizedName}\` ${flagEmoji}**`
+      return `**${nowEmoji} ${onOffEmoji}: ${flagEmoji} \`${localeName} ${localizedName}\`**`
     })
     return contents.join('\n')
   }
 
-  private _nowEmoji(index: number) {
-    return this._nowIndex === index ? '➡' : '<:none:1177369293512515676>'
-  }
-
-  private _onOffEmoji(isSet: boolean) {
-    return isSet ? '✅' : '❌'
-  }
-
-  private _getLocaleName(locale: LocaleString) {
-    const { i18n } = this.commandManager
-    return i18n.localeName[locale]
+  private _getNowEmoji(index: number) {
+    return this._nowIndex === index ? '➡' : '<:none:1177449522025205910>'
   }
 
   private _getLocalizedName(locale: LocaleString) {
     const { i18n } = this.commandManager
-    return i18n.localizedName[locale]
-  }
-
-  private _getFlagEmoji(locale: LocaleString) {
-    switch (locale) {
-      case 'id':
-        return '🇮🇩'
-
-      case 'en-US':
-        return '🇺🇸'
-
-      case 'en-GB':
-        return '🇬🇧'
-
-      case 'bg':
-        return '🇧🇬'
-
-      case 'zh-CN':
-        return '🇨🇳'
-
-      case 'zh-TW':
-        return '🇹🇼'
-
-      case 'hr':
-        return '🇭🇷'
-
-      case 'cs':
-        return '🇨🇿'
-
-      case 'da':
-        return '🇩🇰'
-
-      case 'nl':
-        return '🇳🇱'
-
-      case 'fi':
-        return '🇫🇮'
-
-      case 'fr':
-        return '🇫🇷'
-
-      case 'de':
-        return '🇩🇪'
-
-      case 'el':
-        return '🇬🇷'
-
-      case 'hi':
-        return '🇮🇳'
-
-      case 'hu':
-        return '🇭🇺'
-
-      case 'it':
-        return '🇮🇹'
-
-      case 'ja':
-        return '🇯🇵'
-
-      case 'ko':
-        return '🇰🇷'
-
-      case 'lt':
-        return '🇱🇹'
-
-      case 'no':
-        return '🇳🇴'
-
-      case 'pl':
-        return '🇵🇱'
-
-      case 'pt-BR':
-        return '🇵🇹'
-
-      case 'ro':
-        return '🇷🇴'
-
-      case 'ru':
-        return '🇷🇺'
-
-      case 'es-ES':
-        return '🇪🇸'
-
-      case 'sv-SE':
-        return '🇸🇪'
-
-      case 'th':
-        return '🇹🇭'
-
-      case 'tr':
-        return '🇹🇷'
-
-      case 'uk':
-        return '🇺🇦'
-
-      case 'vi':
-        return '🇻🇳'
-
-    }
+    return i18n.localizedNames[locale]
   }
 }

@@ -3,7 +3,7 @@ import { I18n } from '~/assets/i18n'
 import { CUSTOM_IDS } from '~/constants/ids'
 import { CustomError } from '~/interfaces/IError'
 import Logger from '~/lib/Logger'
-import { lang } from '~/utils/discord'
+import { getGuildI18n } from '~/utils/discord'
 import WrapDataManager from '../generals/WrapDataManager'
 
 export default class CommandManager<T extends CommandInteraction | ButtonInteraction> {
@@ -20,7 +20,7 @@ export default class CommandManager<T extends CommandInteraction | ButtonInterac
 
   constructor(interaction: T) {
     this.interaction = interaction
-    this.i18n = lang(interaction.guild)
+    this.i18n = getGuildI18n(interaction.guild)
     this.channel = interaction.channel
     this.channelId = this.channel?.id ?? ''
     this.guild = interaction.guild
@@ -41,12 +41,6 @@ export default class CommandManager<T extends CommandInteraction | ButtonInterac
   }
 
   public async messagePaginate(messages: BaseMessageOptions[]) {
-    if (messages.length === 0) {
-      throw new CustomError({
-        content: this.i18n.undefinedData
-      })
-    }
-
     let pageIndex = 0
     const maxIndex = messages.length - 1
 
