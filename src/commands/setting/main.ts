@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder, LocaleString } from 'discord.js'
-import { BUTTON_OFF, BUTTON_ON } from '~/constants/buttons'
+import { MAX_DATA_LENGTH } from '~/constants/generals'
 import { CUSTOM_IDS } from '~/constants/ids'
 import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/futures/generals'
 import { Setting } from '~/interfaces/redis/ISetting'
@@ -12,6 +12,7 @@ export default class SettingCommand extends BaseCommandManager {
   private _settings!: Setting[]
   private _nowIndex = 0
   private _maxIndex = 0
+  private _countIsSet = 0
 
   protected async main() {
     await this.resetSetting()
@@ -21,6 +22,7 @@ export default class SettingCommand extends BaseCommandManager {
   private async resetSetting() {
     this._settings = await this._service.getDatas()
     this._maxIndex = this._settings.length - 1
+    this._countIsSet = this._settings.filter(setting => setting.isSet).length
   }
 
   private async _pushButtonLogic() {
@@ -52,7 +54,7 @@ export default class SettingCommand extends BaseCommandManager {
       } else if (i.customId === CUSTOM_IDS.BOTTOM) {
         this._nowIndex = this._maxIndex
       } else {
-        await this._updateIsSet(i.customId)
+        await this._updateIsSet(i)
       }
 
       const messageOptions = this._generateMessage()
@@ -60,17 +62,15 @@ export default class SettingCommand extends BaseCommandManager {
     })
   }
 
-  private async _updateIsSet(customId: string) {
-    switch (customId) {
-      case CUSTOM_IDS.ON:
-        this._settings[this._nowIndex].isSet = true
-        break
+  private async _updateIsSet(i: ButtonInteraction) {
+    const customId = i.customId
+    if (customId !== CUSTOM_IDS.ON && customId !== CUSTOM_IDS.OFF) return
 
-      case CUSTOM_IDS.OFF:
-        this._settings[this._nowIndex].isSet = false
-        break
+    if (customId === CUSTOM_IDS.ON && this._countIsSet >= MAX_DATA_LENGTH) {
+      return
     }
 
+    this._settings[this._nowIndex].isSet = customId === CUSTOM_IDS.ON
     await this._service.saveData(this._settings)
     await this.resetSetting()
   }
@@ -82,16 +82,21 @@ export default class SettingCommand extends BaseCommandManager {
     const upButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.UP).setStyle(ButtonStyle.Secondary).setEmoji('🔼')
     const downButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.DOWN).setStyle(ButtonStyle.Secondary).setEmoji('🔽')
     const bottomButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.BOTTOM).setStyle(ButtonStyle.Secondary).setEmoji('⏬')
+    const onButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.ON).setStyle(ButtonStyle.Secondary).setEmoji('✅')
+    const offButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.OFF).setStyle(ButtonStyle.Secondary).setEmoji('❌')
 
     topButton.setDisabled(this._nowIndex === 0)
     upButton.setDisabled(this._nowIndex === 0)
     downButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._maxIndex)
     bottomButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._maxIndex)
 
+    onButton.setDisabled(this._countIsSet === MAX_DATA_LENGTH)
+    offButton.setDisabled(this._countIsSet === 0)
+
     const messageOptions = WrapDataManager.toMessageOptions({
       components: [
         new ActionRowBuilder<ButtonBuilder>().addComponents(topButton, upButton, downButton, bottomButton),
-        new ActionRowBuilder<ButtonBuilder>().addComponents(BUTTON_ON, BUTTON_OFF)
+        new ActionRowBuilder<ButtonBuilder>().addComponents(onButton, offButton)
       ],
       embeds: [embed]
     })
@@ -105,6 +110,9 @@ export default class SettingCommand extends BaseCommandManager {
     const embed = new EmbedBuilder()
     embed.setTitle(i18n.commands.language.embed.title)
     embed.setDescription(description)
+    embed.setFooter({
+      text: this.format(i18n.commands.language.embed.footer.text, this._countIsSet, MAX_DATA_LENGTH)
+    })
     return embed
   }
 
