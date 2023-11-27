@@ -30,6 +30,14 @@ export class Env {
     return this._getEnv('DEEPL_AUTH_KEY')
   }
 
+  public static get googleProjectId(): string {
+    return this._getEnv('GOOGLE_PROJECT_ID')
+  }
+
+  public static get googleLocation(): string {
+    return this._getEnv('GOOGLE_LOCATION')
+  }
+
   public static isProd(): boolean {
     return this.type === ProjectTypes.PROD
   }

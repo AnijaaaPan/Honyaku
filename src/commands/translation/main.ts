@@ -4,12 +4,10 @@ import { getFlagEmoji } from '~/futures/generals'
 import { CustomError } from '~/interfaces/IError'
 import { TranslationMessage } from '~/interfaces/commands/ITranslation'
 import { Setting } from '~/interfaces/redis/ISetting'
+import { Env } from '~/lib/Env'
 import BaseInteractionManager from '~/managers/BaseInteractionManager'
 import WrapDataManager from '~/managers/generals/WrapDataManager'
 import SettingService from '~/services/SettingService'
-
-const projectId = 'test-gw-342116'
-const location = 'us-central1'
 
 export default class TranslationCommand extends BaseInteractionManager {
   private _service = new SettingService(this.commandManager.guildId)
@@ -168,7 +166,7 @@ export default class TranslationCommand extends BaseInteractionManager {
   private async _translate(text: string) {
     const translationClient = new TranslationServiceClient()
     const res = await translationClient.translateText({
-      parent: translationClient.locationPath(projectId, location),
+      parent: translationClient.locationPath(Env.googleProjectId, Env.googleLocation),
       contents: [text],
       mimeType: 'text/plain',
       sourceLanguageCode: this._originalMessage.lang,
