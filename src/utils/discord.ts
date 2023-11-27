@@ -1,6 +1,6 @@
 import { Guild, Locale } from 'discord.js'
-import { I18n } from '~/assets/i18n'
 import ja from '~/assets/i18n/ja'
+import { I18n } from '~/interfaces/II18n'
 
 export function getI18n(local?: Locale) {
   return i18n(local)

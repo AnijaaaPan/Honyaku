@@ -1,4 +1,5 @@
 import { BaseMessageOptions, InteractionReplyOptions, InteractionUpdateOptions } from 'discord.js'
+import { I18n } from '~/interfaces/II18n'
 import { Setting } from '~/interfaces/IRedis'
 import { CommandPack, ContextPack } from '~/interfaces/commands/IBaseCommand'
 import { TranslationMessage } from '~/interfaces/commands/ITranslation'
@@ -37,6 +38,10 @@ export default class WrapDataManager {
   }
 
   public static toTranslationMessage(data: TranslationMessage) {
+    return data
+  }
+
+  public static toI18n(data: I18n) {
     return data
   }
 }

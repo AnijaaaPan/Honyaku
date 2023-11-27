@@ -1,4 +1,6 @@
-const ja = {
+import WrapDataManager from '~/managers/WrapDataManager'
+
+const ja = WrapDataManager.toI18n({
   commands: {
     language: {
       description: '翻訳する言語を設定します',
@@ -49,6 +51,6 @@ const ja = {
     'zh-CN': '中国語',
     'zh-TW': '台湾, 中国語'
   }
-} as const
+})
 
 export default ja

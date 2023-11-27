@@ -1,6 +1,6 @@
 import { Guild, GuildMember, Interaction, InteractionReplyOptions, TextBasedChannel, User } from 'discord.js'
-import { I18n } from '~/assets/i18n'
 import { CustomError } from '~/interfaces/IError'
+import { I18n } from '~/interfaces/II18n'
 import Logger from '~/lib/Logger'
 import { getGuildI18n } from '~/utils/discord'
 import WrapDataManager from './WrapDataManager'
