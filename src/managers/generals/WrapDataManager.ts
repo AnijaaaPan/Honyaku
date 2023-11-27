@@ -1,5 +1,5 @@
 import { BaseMessageOptions, InteractionReplyOptions, InteractionUpdateOptions } from 'discord.js'
-import { CommandPack } from '~/interfaces/commands/IBaseCommand'
+import { CommandPack, ContextPack } from '~/interfaces/commands/IBaseCommand'
 import { Setting } from '~/interfaces/redis/ISetting'
 
 export default class WrapDataManager {
@@ -7,11 +7,15 @@ export default class WrapDataManager {
     return data as T
   }
 
+  public static toCommands(...data: (CommandPack | ContextPack)[]) {
+    return data
+  }
+
   public static toCommandPack(data: CommandPack) {
     return data
   }
 
-  public static toCommandPacks(...data: CommandPack[]) {
+  public static toContextPack(data: ContextPack) {
     return data
   }
 

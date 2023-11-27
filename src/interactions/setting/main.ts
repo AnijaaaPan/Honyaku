@@ -1,13 +1,13 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder, LocaleString } from 'discord.js'
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, EmbedBuilder } from 'discord.js'
 import { MAX_DATA_LENGTH } from '~/constants/generals'
 import { CUSTOM_IDS } from '~/constants/ids'
 import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/futures/generals'
 import { Setting } from '~/interfaces/redis/ISetting'
+import BaseInteractionManager from '~/managers/BaseInteractionManager'
 import WrapDataManager from '~/managers/generals/WrapDataManager'
 import SettingService from '~/services/SettingService'
-import { BaseCommandManager } from '../BaseCommandManager'
 
-export default class SettingCommand extends BaseCommandManager {
+export default class SettingCommand extends BaseInteractionManager<ChatInputCommandInteraction> {
   private _service = new SettingService(this.commandManager.guildId)
   private _settings!: Setting[]
   private _nowIndex = 0
@@ -123,7 +123,7 @@ export default class SettingCommand extends BaseCommandManager {
       const onOffEmoji = getOnOffEmoji(isSet)
       const flagEmoji = getFlagEmoji(locale)
       const localeName = getLocaleName(locale)
-      const localizedName = this._getLocalizedName(locale)
+      const localizedName = this.getLocalizedName(locale)
       return `**${nowEmoji} ${onOffEmoji}: ${flagEmoji} \`${localeName} ${localizedName}\`**`
     })
     return contents.join('\n')
@@ -131,10 +131,5 @@ export default class SettingCommand extends BaseCommandManager {
 
   private _getNowEmoji(index: number) {
     return this._nowIndex === index ? '➡' : '<:none:1177449522025205910>'
-  }
-
-  private _getLocalizedName(locale: LocaleString) {
-    const { i18n } = this.commandManager
-    return i18n.localizedNames[locale]
   }
 }

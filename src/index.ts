@@ -1,7 +1,6 @@
 import { Client, Events, GatewayIntentBits, Partials } from 'discord.js'
 import clientReady from './handlers/clientReady'
 import interactionCreate from './handlers/interactionCreate'
-import messageReactionAdd from './handlers/messageReactionAdd'
 import { errorHandling } from './handlers/unhandledRejection'
 import { Env } from './lib/Env'
 
@@ -11,7 +10,6 @@ export const client = new Client({
 })
 
 client.once(Events.ClientReady, clientReady)
-client.on(Events.MessageReactionAdd, messageReactionAdd)
 client.on(Events.InteractionCreate, interactionCreate)
 
 process.on('unhandledRejection', errorHandling)

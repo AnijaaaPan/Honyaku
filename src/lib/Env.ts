@@ -26,6 +26,10 @@ export class Env {
     return this._getEnv('LOG_WEBHOOK_TOKEN')
   }
 
+  public static get deeplAuthKey(): string {
+    return this._getEnv('DEEPL_AUTH_KEY')
+  }
+
   public static isProd(): boolean {
     return this.type === ProjectTypes.PROD
   }

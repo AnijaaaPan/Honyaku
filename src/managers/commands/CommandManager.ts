@@ -1,4 +1,4 @@
-import { ActionRowBuilder, BaseMessageOptions, ButtonBuilder, ButtonInteraction, ButtonStyle, CommandInteraction, ComponentType, Guild, GuildMember, InteractionReplyOptions, TextBasedChannel, User } from 'discord.js'
+import { ActionRowBuilder, BaseMessageOptions, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, Guild, GuildMember, InteractionReplyOptions, MessageContextMenuCommandInteraction, TextBasedChannel, User } from 'discord.js'
 import { I18n } from '~/assets/i18n'
 import { CUSTOM_IDS } from '~/constants/ids'
 import { CustomError } from '~/interfaces/IError'
@@ -6,8 +6,7 @@ import Logger from '~/lib/Logger'
 import { getGuildI18n } from '~/utils/discord'
 import WrapDataManager from '../generals/WrapDataManager'
 
-export default class CommandManager<T extends CommandInteraction | ButtonInteraction> {
-  public interaction: T
+export default class CommandManager<T extends ChatInputCommandInteraction | ButtonInteraction | MessageContextMenuCommandInteraction> {
   public i18n: I18n
   public channel: TextBasedChannel | null
   public channelId: string
@@ -18,8 +17,7 @@ export default class CommandManager<T extends CommandInteraction | ButtonInterac
   public userId: string
   private _isError = WrapDataManager.castToType<boolean>(false)
 
-  constructor(interaction: T) {
-    this.interaction = interaction
+  constructor(public interaction: T) {
     this.i18n = getGuildI18n(interaction.guild)
     this.channel = interaction.channel
     this.channelId = this.channel?.id ?? ''

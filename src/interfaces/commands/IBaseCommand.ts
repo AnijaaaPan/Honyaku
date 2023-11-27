@@ -1,14 +1,18 @@
-import { ChatInputApplicationCommandData } from 'discord.js'
-import { BaseCommandManager } from '~/commands/BaseCommandManager'
+import { ContextMenuCommandBuilder, SlashCommandBuilder } from 'discord.js'
+import BaseInteractionManager from '~/managers/BaseInteractionManager'
 
 interface BasePack {
   instance: ReturnType<typeof instance>
 }
 
 export interface CommandPack extends BasePack {
-  data: ChatInputApplicationCommandData
+  data: SlashCommandBuilder
 }
 
-export function instance<T extends typeof BaseCommandManager>(CommandType: new (...args: ConstructorParameters<T>) => BaseCommandManager) {
+export interface ContextPack extends BasePack {
+  data: ContextMenuCommandBuilder
+}
+
+export function instance<T extends typeof BaseInteractionManager>(CommandType: new (...args: ConstructorParameters<T>) => BaseInteractionManager) {
   return (...args: ConstructorParameters<T>) => new CommandType(...args)
 }

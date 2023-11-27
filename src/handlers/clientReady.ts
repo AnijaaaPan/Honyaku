@@ -1,4 +1,4 @@
-import commands from '~/commands'
+import interactionCommands from '~/interactions'
 import Logger from '~/lib/Logger'
 import { redisConnect } from '~/lib/Redis'
 import SettingService from '~/services/SettingService'
@@ -8,8 +8,6 @@ export default async function clientReady() {
   redisConnect()
   Logger.info(`Logged in: ${client.user?.tag}`)
 
-  await client.application?.commands.set(commands.map((d) => d.data))
-
   const guilds = await client.guilds.fetch()
   await Promise.all(
     guilds.map(async (guild) => {
@@ -17,5 +15,7 @@ export default async function clientReady() {
       await settingService.initData()
     })
   )
+
+  await client.application?.commands.set(interactionCommands.map((d) => d.data))
 }
 

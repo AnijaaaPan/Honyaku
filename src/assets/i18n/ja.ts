@@ -3,12 +3,16 @@ const ja = {
     language: {
       description: '翻訳する言語を設定します',
       embed: {
-        title: '翻訳言語設定画面:',
         footer: {
           text: '最大言語設定数: {0} / {1}'
-        }
+        },
+        title: '翻訳言語設定画面:'
       },
       maxDataLength: '>>> **※最大{0}つまでの言語しか設定できません**'
+    },
+    translation: {
+      content: '>>> **※翻訳する言語を指定してください**',
+      undefined: '>>> **※翻訳する言語が設定されていません\n`/setting`で設定して下さい**'
     }
   },
   localizedNames: {
