@@ -90,7 +90,7 @@ export default class TranslationCommand extends BaseInteractionManager {
   private async _translateMessage() {
     const message = this._originalMessage.messageOptions
     const messageOptions = WrapDataManager.toMessageOptions({
-      content: undefined,
+      content: '',
       components: [],
       embeds: []
     })
