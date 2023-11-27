@@ -1,5 +1,5 @@
 import { Interaction } from 'discord.js'
-import commands from '~/interactions'
+import commands from '~/commands'
 import CommandManager from '~/managers/commands/CommandManager'
 
 export default async function interactionCreate(interaction: Interaction) {
@@ -7,5 +7,5 @@ export default async function interactionCreate(interaction: Interaction) {
 
   const commandManager = new CommandManager(interaction)
   const command = commands.find((c) => c.data.name === interaction.commandName)
-  await command?.instance(commandManager).execute()
+  await command?.instance(commandManager).execute().catch(() => { })
 }

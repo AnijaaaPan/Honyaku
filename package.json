@@ -1,9 +1,8 @@
 {
   "author": "AnijaaaPan",
   "dependencies": {
-    "cld": "^2.9.1",
+    "@google-cloud/translate": "^8.0.2",
     "cron": "^3.1.6",
-    "deepl-node": "^1.11.0",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "ioredis": "^5.3.2"

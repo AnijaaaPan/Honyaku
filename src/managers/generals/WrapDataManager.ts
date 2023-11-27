@@ -1,5 +1,6 @@
 import { BaseMessageOptions, InteractionReplyOptions, InteractionUpdateOptions } from 'discord.js'
 import { CommandPack, ContextPack } from '~/interfaces/commands/IBaseCommand'
+import { TranslationMessage } from '~/interfaces/commands/ITranslation'
 import { Setting } from '~/interfaces/redis/ISetting'
 
 export default class WrapDataManager {
@@ -32,6 +33,10 @@ export default class WrapDataManager {
   }
 
   public static toSetting(data: Setting) {
+    return data
+  }
+
+  public static toTranslationMessage(data: TranslationMessage) {
     return data
   }
 }

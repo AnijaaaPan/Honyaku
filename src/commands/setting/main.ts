@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, EmbedBuilder } from 'discord.js'
+import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder } from 'discord.js'
 import { MAX_DATA_LENGTH } from '~/constants/generals'
 import { CUSTOM_IDS } from '~/constants/ids'
 import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/futures/generals'
@@ -7,7 +7,7 @@ import BaseInteractionManager from '~/managers/BaseInteractionManager'
 import WrapDataManager from '~/managers/generals/WrapDataManager'
 import SettingService from '~/services/SettingService'
 
-export default class SettingCommand extends BaseInteractionManager<ChatInputCommandInteraction> {
+export default class SettingCommand extends BaseInteractionManager {
   private _service = new SettingService(this.commandManager.guildId)
   private _settings!: Setting[]
   private _nowIndex = 0

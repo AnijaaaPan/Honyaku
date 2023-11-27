@@ -1,4 +1,4 @@
-import interactionCommands from '~/interactions'
+import commands from '~/commands'
 import Logger from '~/lib/Logger'
 import { redisConnect } from '~/lib/Redis'
 import SettingService from '~/services/SettingService'
@@ -16,6 +16,6 @@ export default async function clientReady() {
     })
   )
 
-  await client.application?.commands.set(interactionCommands.map((d) => d.data))
+  await client.application?.commands.set(commands.map((d) => d.data))
 }
 

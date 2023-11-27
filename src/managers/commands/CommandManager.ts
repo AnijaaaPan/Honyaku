@@ -1,4 +1,4 @@
-import { ActionRowBuilder, BaseMessageOptions, ButtonBuilder, ButtonInteraction, ButtonStyle, ChatInputCommandInteraction, ComponentType, Guild, GuildMember, InteractionReplyOptions, MessageContextMenuCommandInteraction, TextBasedChannel, User } from 'discord.js'
+import { ActionRowBuilder, BaseMessageOptions, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, Guild, GuildMember, Interaction, InteractionReplyOptions, TextBasedChannel, User } from 'discord.js'
 import { I18n } from '~/assets/i18n'
 import { CUSTOM_IDS } from '~/constants/ids'
 import { CustomError } from '~/interfaces/IError'
@@ -6,7 +6,7 @@ import Logger from '~/lib/Logger'
 import { getGuildI18n } from '~/utils/discord'
 import WrapDataManager from '../generals/WrapDataManager'
 
-export default class CommandManager<T extends ChatInputCommandInteraction | ButtonInteraction | MessageContextMenuCommandInteraction> {
+export default class CommandManager {
   public i18n: I18n
   public channel: TextBasedChannel | null
   public channelId: string
@@ -17,7 +17,7 @@ export default class CommandManager<T extends ChatInputCommandInteraction | Butt
   public userId: string
   private _isError = WrapDataManager.castToType<boolean>(false)
 
-  constructor(public interaction: T) {
+  constructor(public interaction: Interaction) {
     this.i18n = getGuildI18n(interaction.guild)
     this.channel = interaction.channel
     this.channelId = this.channel?.id ?? ''
@@ -29,8 +29,7 @@ export default class CommandManager<T extends ChatInputCommandInteraction | Butt
   }
 
   public async updateMessage(messageOptions: InteractionReplyOptions) {
-    if (!this.interaction) return
-
+    if (!this.interaction || !this.interaction.isCommand()) return
     if (this.interaction.replied || this.interaction.deferred) {
       await this.interaction.editReply(messageOptions)
     } else {

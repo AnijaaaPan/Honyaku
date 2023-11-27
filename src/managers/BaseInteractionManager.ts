@@ -1,9 +1,9 @@
-import { ButtonInteraction, ChatInputCommandInteraction, LocaleString, MessageContextMenuCommandInteraction } from 'discord.js'
+import { LocaleString } from 'discord.js'
 import BaseManager from './BaseManager'
 import CommandManager from './commands/CommandManager'
 
-export default abstract class BaseInteractionManager<T extends ChatInputCommandInteraction | ButtonInteraction | MessageContextMenuCommandInteraction> extends BaseManager {
-  constructor(protected commandManager: CommandManager<T>) {
+export default abstract class BaseInteractionManager extends BaseManager {
+  constructor(protected commandManager: CommandManager) {
     super()
   }
 
