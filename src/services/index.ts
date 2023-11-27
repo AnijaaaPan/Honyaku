@@ -1,7 +1,7 @@
 import { KEY_SEPARATOR, REDIS_KEYS } from '~/constants/redis'
-import { RedisKeys } from '~/interfaces/redis/IRedis'
+import { RedisKeys } from '~/interfaces/IRedis'
 import { redis } from '~/lib/Redis'
-import WrapDataManager from '~/managers/generals/WrapDataManager'
+import WrapDataManager from '~/managers/WrapDataManager'
 
 export class Service<T> {
   constructor(

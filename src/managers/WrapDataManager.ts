@@ -1,7 +1,7 @@
 import { BaseMessageOptions, InteractionReplyOptions, InteractionUpdateOptions } from 'discord.js'
+import { Setting } from '~/interfaces/IRedis'
 import { CommandPack, ContextPack } from '~/interfaces/commands/IBaseCommand'
 import { TranslationMessage } from '~/interfaces/commands/ITranslation'
-import { Setting } from '~/interfaces/redis/ISetting'
 
 export default class WrapDataManager {
   public static castToType<T>(data: any) {

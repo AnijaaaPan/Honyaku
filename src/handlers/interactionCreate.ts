@@ -1,6 +1,6 @@
 import { Interaction } from 'discord.js'
 import commands from '~/commands'
-import CommandManager from '~/managers/commands/CommandManager'
+import CommandManager from '~/managers/CommandManager'
 
 export default async function interactionCreate(interaction: Interaction) {
   if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) return

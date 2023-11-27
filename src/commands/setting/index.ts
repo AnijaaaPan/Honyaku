@@ -1,6 +1,6 @@
 import { Locale, PermissionsBitField, SlashCommandBuilder } from 'discord.js'
 import { instance } from '~/interfaces/commands/IBaseCommand'
-import WrapDataManager from '~/managers/generals/WrapDataManager'
+import WrapDataManager from '~/managers/WrapDataManager'
 import { getI18n } from '~/utils/discord'
 import SettingCommand from './main'
 

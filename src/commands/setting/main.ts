@@ -1,11 +1,11 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder } from 'discord.js'
 import { MAX_DATA_LENGTH } from '~/constants/generals'
 import { CUSTOM_IDS } from '~/constants/ids'
-import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/futures/generals'
-import { Setting } from '~/interfaces/redis/ISetting'
+import { Setting } from '~/interfaces/IRedis'
 import BaseInteractionManager from '~/managers/BaseInteractionManager'
-import WrapDataManager from '~/managers/generals/WrapDataManager'
+import WrapDataManager from '~/managers/WrapDataManager'
 import SettingService from '~/services/SettingService'
+import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/utils/generals'
 
 export default class SettingCommand extends BaseInteractionManager {
   private _service = new SettingService(this.commandManager.guildId)
@@ -21,12 +21,16 @@ export default class SettingCommand extends BaseInteractionManager {
 
   private async resetSetting() {
     this._settings = await this._service.getDatas()
+    if (this._settings.length === 0) {
+      const initData = await this._service.initData() ?? []
+      this._settings = initData
+    }
     this._maxIndex = this._settings.length - 1
     this._countIsSet = this._settings.filter(setting => setting.isSet).length
   }
 
   private async _pushButtonLogic() {
-    const { channel, userId } = this.commandManager
+    const { channel } = this.commandManager
     const messageOptions = this._generateMessage()
     const interactionReplyOptions = WrapDataManager.toInteractionReplyOptions({
       ...messageOptions,
@@ -34,14 +38,13 @@ export default class SettingCommand extends BaseInteractionManager {
     })
     await this.commandManager.updateMessage(interactionReplyOptions)
 
-    const filter = (i: ButtonInteraction) => {
-      return i.user.id === userId
-    }
-
+    const customIds = WrapDataManager.castToType<string[]>([CUSTOM_IDS.TOP, CUSTOM_IDS.UP, CUSTOM_IDS.DOWN, CUSTOM_IDS.BOTTOM, CUSTOM_IDS.ON, CUSTOM_IDS.OFF])
     const collector = channel?.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      filter,
-      idle: 30000
+      filter: (i: ButtonInteraction) => {
+        return customIds.includes(i.customId)
+      },
+      idle: 30000,
     })
 
     collector?.on('collect', async (i) => {
@@ -65,10 +68,7 @@ export default class SettingCommand extends BaseInteractionManager {
   private async _updateIsSet(i: ButtonInteraction) {
     const customId = i.customId
     if (customId !== CUSTOM_IDS.ON && customId !== CUSTOM_IDS.OFF) return
-
-    if (customId === CUSTOM_IDS.ON && this._countIsSet >= MAX_DATA_LENGTH) {
-      return
-    }
+    if (customId === CUSTOM_IDS.ON && this._countIsSet >= MAX_DATA_LENGTH) return
 
     this._settings[this._nowIndex].isSet = customId === CUSTOM_IDS.ON
     await this._service.saveData(this._settings)

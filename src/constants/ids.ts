@@ -10,9 +10,4 @@ export const CUSTOM_IDS = {
   UP: 'up',
   DOWN: 'down',
   BOTTOM: 'bottom',
-
-  PAGE_INITIAL: 'page_initial',
-  PAGE_BACK: 'page_back',
-  PAGE_NEXT: 'page_next',
-  PAGE_END: 'page_end',
 } as const

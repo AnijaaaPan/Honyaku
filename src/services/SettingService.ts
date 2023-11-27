@@ -1,6 +1,6 @@
 import { Locale } from 'discord.js'
-import { Setting } from '~/interfaces/redis/ISetting'
-import WrapDataManager from '~/managers/generals/WrapDataManager'
+import { Setting } from '~/interfaces/IRedis'
+import WrapDataManager from '~/managers/WrapDataManager'
 import { Service } from '.'
 
 export default class SettingService extends Service<Setting> {

@@ -1,13 +1,13 @@
 import { TranslationServiceClient } from '@google-cloud/translate'
 import { APIEmbedField, ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, Embed, EmbedBuilder, LocaleString } from 'discord.js'
-import { getFlagEmoji } from '~/futures/generals'
 import { CustomError } from '~/interfaces/IError'
+import { Setting } from '~/interfaces/IRedis'
 import { TranslationMessage } from '~/interfaces/commands/ITranslation'
-import { Setting } from '~/interfaces/redis/ISetting'
 import { Env } from '~/lib/Env'
 import BaseInteractionManager from '~/managers/BaseInteractionManager'
-import WrapDataManager from '~/managers/generals/WrapDataManager'
+import WrapDataManager from '~/managers/WrapDataManager'
 import SettingService from '~/services/SettingService'
+import { getFlagEmoji } from '~/utils/generals'
 
 export default class TranslationCommand extends BaseInteractionManager {
   private _service = new SettingService(this.commandManager.guildId)
@@ -19,7 +19,7 @@ export default class TranslationCommand extends BaseInteractionManager {
     await this._guard()
     this._setInitData()
 
-    const { channel, i18n, userId } = this.commandManager
+    const { channel, i18n } = this.commandManager
     const components = this._getSettingComponents()
     const interactionReplyOptions = WrapDataManager.toInteractionReplyOptions({
       content: i18n.commands.translation.content,
@@ -28,13 +28,11 @@ export default class TranslationCommand extends BaseInteractionManager {
     })
     await this.commandManager.updateMessage(interactionReplyOptions)
 
-    const filter = (i: ButtonInteraction) => {
-      return i.user.id === userId && i.customId.includes('lang-')
-    }
-
     const collector = channel?.createMessageComponentCollector({
       componentType: ComponentType.Button,
-      filter
+      filter: (i: ButtonInteraction) => {
+        return i.customId.includes('lang-')
+      }
     })
 
     collector?.on('collect', async (i) => {

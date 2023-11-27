@@ -1,6 +1,6 @@
 import { LocaleString } from 'discord.js'
 import BaseManager from './BaseManager'
-import CommandManager from './commands/CommandManager'
+import CommandManager from './CommandManager'
 
 export default abstract class BaseInteractionManager extends BaseManager {
   constructor(protected commandManager: CommandManager) {

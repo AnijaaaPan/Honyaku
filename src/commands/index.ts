@@ -1,4 +1,4 @@
-import WrapDataManager from '~/managers/generals/WrapDataManager'
+import WrapDataManager from '~/managers/WrapDataManager'
 import setting from './setting'
 import translation from './translation'
 
