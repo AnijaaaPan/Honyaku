@@ -74,10 +74,10 @@ export default class TranslationCommand extends BaseInteractionManager {
       const localizedName = this.getLocalizedName(locale)
 
       const button = new ButtonBuilder()
-      button.setCustomId(customId)
-      button.setStyle(ButtonStyle.Secondary)
-      button.setEmoji(flagEmoji)
-      button.setLabel(localizedName)
+        .setCustomId(customId)
+        .setStyle(ButtonStyle.Secondary)
+        .setEmoji(flagEmoji)
+        .setLabel(localizedName)
       return button
     })
 
@@ -163,7 +163,7 @@ export default class TranslationCommand extends BaseInteractionManager {
 
   private async _translate(text: string) {
     const translationClient = new TranslationServiceClient({
-      keyFilename: 'C:\\Users\\taqto\\Desktop\\Github\\Discord\\Honyaku\\googleAPI.json'
+      keyFilename: 'googleAPI.json'
     })
     const res = await translationClient.translateText({
       parent: translationClient.locationPath(Env.googleProjectId, Env.googleLocation),

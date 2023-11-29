@@ -14,6 +14,7 @@ export default class CommandManager {
   public member: GuildMember
   public user: User
   public userId: string
+
   private _isError = WrapDataManager.castToType<boolean>(false)
 
   constructor(public interaction: Interaction) {

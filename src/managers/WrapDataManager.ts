@@ -1,4 +1,4 @@
-import { BaseMessageOptions, InteractionReplyOptions, InteractionUpdateOptions } from 'discord.js'
+import { BaseMessageOptions, InteractionReplyOptions } from 'discord.js'
 import { I18n } from '~/interfaces/II18n'
 import { Setting } from '~/interfaces/IRedis'
 import { CommandPack, ContextPack } from '~/interfaces/commands/IBaseCommand'
@@ -26,10 +26,6 @@ export default class WrapDataManager {
   }
 
   public static toInteractionReplyOptions(data: InteractionReplyOptions) {
-    return data
-  }
-
-  public static toInteractionUpdateOptions(data: InteractionUpdateOptions) {
     return data
   }
 

@@ -6,4 +6,3 @@ export default function clientReady() {
   redisConnect()
   Logger.info(`Logged in: ${client.user?.tag}`)
 }
-

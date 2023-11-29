@@ -14,6 +14,7 @@ export default class SettingService extends Service<Setting> {
     const newLocaleValues = localeValues.filter(locale => {
       return !datas.some(data => data.locale === locale)
     })
+    
     if (newLocaleValues.length === 0) return
 
     const newDatas = newLocaleValues.map(locale => {

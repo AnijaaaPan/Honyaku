@@ -82,6 +82,7 @@ export default class SettingCommand extends BaseInteractionManager {
     const upButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.UP).setStyle(ButtonStyle.Secondary).setEmoji('🔼')
     const downButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.DOWN).setStyle(ButtonStyle.Secondary).setEmoji('🔽')
     const bottomButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.BOTTOM).setStyle(ButtonStyle.Secondary).setEmoji('⏬')
+
     const onButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.ON).setStyle(ButtonStyle.Secondary).setEmoji('✅')
     const offButton = new ButtonBuilder().setCustomId(CUSTOM_IDS.OFF).setStyle(ButtonStyle.Secondary).setEmoji('❌')
 

@@ -6,43 +6,43 @@ import { CustomError } from '~/interfaces/IError'
 dotenv.config()
 
 export class Env {
-  public static get type(): string {
+  public static get type() {
     return this._getEnv('TYPE')
   }
 
-  public static get redisUrl(): string {
+  public static get redisUrl() {
     return this._getEnv('REDIS_URL')
   }
 
-  public static get token(): string {
+  public static get token() {
     return this._getEnv('TOKEN')
   }
 
-  public static get logWebhookId(): string {
+  public static get logWebhookId() {
     return this._getEnv('LOG_WEBHOOK_ID')
   }
 
-  public static get logWebhookToken(): string {
+  public static get logWebhookToken() {
     return this._getEnv('LOG_WEBHOOK_TOKEN')
   }
 
-  public static get deeplAuthKey(): string {
+  public static get deeplAuthKey() {
     return this._getEnv('DEEPL_AUTH_KEY')
   }
 
-  public static get googleProjectId(): string {
+  public static get googleProjectId() {
     return this._getEnv('GOOGLE_PROJECT_ID')
   }
 
-  public static get googleLocation(): string {
+  public static get googleLocation() {
     return this._getEnv('GOOGLE_LOCATION')
   }
 
-  public static isProd(): boolean {
+  public static isProd() {
     return this.type === ProjectTypes.PROD
   }
 
-  public static isDev(): boolean {
+  public static isDev() {
     return this.type === ProjectTypes.DEV
   }
 
