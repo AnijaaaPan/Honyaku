@@ -162,7 +162,9 @@ export default class TranslationCommand extends BaseInteractionManager {
   }
 
   private async _translate(text: string) {
-    const translationClient = new TranslationServiceClient()
+    const translationClient = new TranslationServiceClient({
+      keyFilename: 'C:\\Users\\taqto\\Desktop\\Github\\Discord\\Honyaku\\googleAPI.json'
+    })
     const res = await translationClient.translateText({
       parent: translationClient.locationPath(Env.googleProjectId, Env.googleLocation),
       contents: [text],
@@ -172,6 +174,13 @@ export default class TranslationCommand extends BaseInteractionManager {
     })
     const translations = res[0].translations
     if (!translations) return ''
-    return WrapDataManager.castToType<string>(translations[0].translatedText)
+
+    const content = WrapDataManager.castToType<string>(translations[0].translatedText)
+    return this._replaceTranslateContent(content)
+  }
+
+  private _replaceTranslateContent(content: string) {
+    return content
+      .replace('\n>\n', '\n> \n')
   }
 }

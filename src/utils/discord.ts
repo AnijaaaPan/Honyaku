@@ -6,6 +6,7 @@ import de from '~/assets/i18n/de'
 import el from '~/assets/i18n/el'
 import enGb from '~/assets/i18n/enGb'
 import enUs from '~/assets/i18n/enUs'
+import esEs from '~/assets/i18n/esEs'
 import fi from '~/assets/i18n/fi'
 import fr from '~/assets/i18n/fr'
 import hi from '~/assets/i18n/hi'
@@ -21,6 +22,12 @@ import no from '~/assets/i18n/no'
 import pl from '~/assets/i18n/pl'
 import pt from '~/assets/i18n/pt'
 import ro from '~/assets/i18n/ro'
+import ru from '~/assets/i18n/ru'
+import svSe from '~/assets/i18n/svSe'
+import th from '~/assets/i18n/th'
+import tr from '~/assets/i18n/tr'
+import uk from '~/assets/i18n/uk'
+import vi from '~/assets/i18n/vi'
 import zhCn from '~/assets/i18n/zhCn'
 import zhTw from '~/assets/i18n/zhTw'
 import { I18n } from '~/interfaces/II18n'
@@ -85,19 +92,19 @@ function i18n(local?: Locale): I18n {
     case Locale.Romanian:
       return ro
     case Locale.Russian:
-
+      return ru
     case Locale.SpanishES:
-
+      return esEs
     case Locale.Swedish:
-
+      return svSe
     case Locale.Thai:
-
+      return th
     case Locale.Turkish:
-
+      return tr
     case Locale.Ukrainian:
-
+      return uk
     case Locale.Vietnamese:
-
+      return vi
     case undefined:
       return enUs
   }
