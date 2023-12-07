@@ -2,13 +2,13 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
   extends: ['standard', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
   rules: {
@@ -16,6 +16,6 @@ module.exports = {
     'no-useless-constructor': 'off',
     quotes: 'error',
     'require-await': 'error',
-    semi: 'error'
-  }
+    semi: 'error',
+  },
 }
