@@ -26,10 +26,6 @@ export class Env {
     return this._getEnv('LOG_WEBHOOK_TOKEN')
   }
 
-  public static get deeplAuthKey() {
-    return this._getEnv('DEEPL_AUTH_KEY')
-  }
-
   public static get googleProjectId() {
     return this._getEnv('GOOGLE_PROJECT_ID')
   }
