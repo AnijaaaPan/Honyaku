@@ -61,7 +61,7 @@ export default class SettingCommand extends BaseInteractionManager {
       }
 
       const messageOptions = this._generateMessage()
-      await i.update(messageOptions)
+      await i.update(messageOptions).catch(() => { })
     })
   }
 

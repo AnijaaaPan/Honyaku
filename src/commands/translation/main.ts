@@ -39,7 +39,7 @@ export default class TranslationCommand extends BaseInteractionManager {
       this._targetLang = WrapDataManager.castToType<LocaleString>(i.customId.replace('lang-', ''))
 
       const translateMessage = await this._translateMessage()
-      await i.update(translateMessage)
+      await i.update(translateMessage).catch(() => { })
       collector.stop()
     })
   }
