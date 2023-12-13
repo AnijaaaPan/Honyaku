@@ -6,7 +6,7 @@ const id = WrapDataManager.toI18n({
       description: 'Cara Menggunakan BOT',
       embeds: [{
         contents: ['Bahasa yang saat ini dipilih', 'Pindah ke atas', 'Pindah ke bawah', 'Aktifkan bahasa', 'Nonaktifkan bahasa'],
-        description: '**</setting:{0}> Dapat diatur melalui perintah**',
+        description: '**`/setting` Dapat diatur melalui perintah**',
         footer: {
           text: '※Perintah ini hanya dapat digunakan jika Anda memiliki semua izin'
         },

@@ -6,7 +6,7 @@ const cs = WrapDataManager.toI18n({
       description: 'Návod k použití BOT',
       embeds: [{
         contents: ['Aktuálně vybraný jazyk', 'Přesunout nahoru', 'Přesunout dolů', 'Aktivovat jazyk', 'Deaktivovat jazyk'],
-        description: '**</setting:{0}> Nastavit lze pomocí příkazu**',
+        description: '**`/setting` Nastavit lze pomocí příkazu**',
         footer: {
           text: '※Tento příkaz lze použít pouze s plnými právy'
         },

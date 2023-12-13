@@ -6,7 +6,7 @@ const hr = WrapDataManager.toI18n({
       description: 'Kako koristiti BOT',
       embeds: [{
         contents: ['Trenutno odabrani jezik', 'Pomicanje prema gore', 'Pomicanje prema dolje', 'Aktiviranje jezika', 'Deaktiviranje jezika'],
-        description: '**</setting:{0}> Može se postaviti putem naredbe**',
+        description: '**`/setting` Može se postaviti putem naredbe**',
         footer: {
           text: '※Ova naredba može se koristiti samo ako imate pune ovlasti'
         },

@@ -6,7 +6,7 @@ const fr = WrapDataManager.toI18n({
       description: 'Comment utiliser le BOT',
       embeds: [{
         contents: ['Langue actuellement sélectionnée', 'Monter', 'Descendre', 'Activer la langue', 'Désactiver la langue'],
-        description: '**</setting:{0}> Peut être configuré via la commande**',
+        description: '**`/setting` Peut être configuré via la commande**',
         footer: {
           text: '※Cette commande ne peut être utilisée que si vous avez tous les droits'
         },

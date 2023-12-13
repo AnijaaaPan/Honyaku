@@ -6,7 +6,7 @@ const da = WrapDataManager.toI18n({
       description: 'Sådan bruger du BOT',
       embeds: [{
         contents: ['Det nuværende valgte sprog', 'Flyt op', 'Flyt ned', 'Aktivér sprog', 'Deaktiver sprog'],
-        description: '**</setting:{0}> Kan indstilles via kommandoen**',
+        description: '**`/setting` Kan indstilles via kommandoen**',
         footer: {
           text: '※Denne kommando kan kun bruges, hvis du har fulde rettigheder'
         },

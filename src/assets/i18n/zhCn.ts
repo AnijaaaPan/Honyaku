@@ -6,7 +6,7 @@ const zhCn = WrapDataManager.toI18n({
       description: '如何使用BOT',
       embeds: [{
         contents: ['当前选择的语言', '向上移动', '向下移动', '激活语言', '停用语言'],
-        description: '**</setting:{0}> 可通过命令设置**',
+        description: '**`/setting` 可通过命令设置**',
         footer: {
           text: '※此命令仅在您拥有全部权限时可用'
         },

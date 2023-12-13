@@ -6,7 +6,7 @@ const lt = WrapDataManager.toI18n({
       description: 'Kaip naudotis BOT',
       embeds: [{
         contents: ['Dabar pasirinkta kalba', 'Pakilti aukštyn', 'Nusileisti žemyn', 'Įjungti kalbą', 'Išjungti kalbą'],
-        description: '**</setting:{0}> Galima nustatyti naudojant komandą**',
+        description: '**`/setting` Galima nustatyti naudojant komandą**',
         footer: {
           text: '※Šią komandą galima naudoti tik turint visiškas teises'
         },

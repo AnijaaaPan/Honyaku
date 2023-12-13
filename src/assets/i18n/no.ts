@@ -6,7 +6,7 @@ const no = WrapDataManager.toI18n({
       description: 'Slik bruker du BOT',
       embeds: [{
         contents: ['Gjeldende valgt språk', 'Flytt opp', 'Flytt ned', 'Aktiver språk', 'Deaktiver språk'],
-        description: '**</setting:{0}> Kan settes via kommandoen**',
+        description: '**`/setting` Kan settes via kommandoen**',
         footer: {
           text: '※Denne kommandoen kan bare brukes hvis du har full tilgang'
         },

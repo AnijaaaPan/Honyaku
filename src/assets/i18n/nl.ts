@@ -6,7 +6,7 @@ const nl = WrapDataManager.toI18n({
       description: 'Hoe de BOT te gebruiken',
       embeds: [{
         contents: ['Momenteel geselecteerde taal', 'Omhoog bewegen', 'Omlaag bewegen', 'Taal activeren', 'Taal deactiveren'],
-        description: '**</setting:{0}> Kan via de opdracht worden ingesteld**',
+        description: '**`/setting` Kan via de opdracht worden ingesteld**',
         footer: {
           text: '※Deze opdracht kan alleen worden gebruikt als u volledige rechten hebt'
         },

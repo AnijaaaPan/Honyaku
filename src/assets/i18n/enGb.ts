@@ -6,7 +6,7 @@ const enGb = WrapDataManager.toI18n({
       description: 'How to Use the BOT',
       embeds: [{
         contents: ['Currently selected language', 'Move up', 'Move down', 'Activate language', 'Deactivate language'],
-        description: '**</setting:{0}> Can be set via the command**',
+        description: '**`/setting` Can be set via the command**',
         footer: {
           text: '※This command can only be used if you have full permissions'
         },

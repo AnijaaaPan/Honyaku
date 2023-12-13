@@ -6,7 +6,7 @@ const zhTw = WrapDataManager.toI18n({
       description: '如何使用BOT',
       embeds: [{
         contents: ['目前選擇的語言', '向上移動', '向下移動', '啟動語言', '停用語言'],
-        description: '**</setting:{0}> 可透過命令設定**',
+        description: '**`/setting` 可透過命令設定**',
         footer: {
           text: '※此命令僅在您擁有全部權限時可用'
         },

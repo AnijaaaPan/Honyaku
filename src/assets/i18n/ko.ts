@@ -6,7 +6,7 @@ const ko = WrapDataManager.toI18n({
       description: 'BOT 사용 방법',
       embeds: [{
         contents: ['현재 선택된 언어', '위로 이동', '아래로 이동', '언어 활성화', '언어 비활성화'],
-        description: '**</setting:{0}> 명령을 통해 설정할 수 있습니다**',
+        description: '**`/setting` 명령을 통해 설정할 수 있습니다**',
         footer: {
           text: '※이 명령은 모든 권한이 있는 경우에만 사용할 수 있습니다'
         },

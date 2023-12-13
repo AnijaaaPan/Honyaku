@@ -6,7 +6,7 @@ const vi = WrapDataManager.toI18n({
       description: 'Cách sử dụng BOT',
       embeds: [{
         contents: ['Ngôn ngữ hiện tại được chọn', 'Di chuyển lên', 'Di chuyển xuống', 'Kích hoạt ngôn ngữ', 'Vô hiệu hóa ngôn ngữ'],
-        description: '**</setting:{0}> Có thể được thiết lập thông qua lệnh**',
+        description: '**`/setting` Có thể được thiết lập thông qua lệnh**',
         footer: {
           text: '※Lệnh này chỉ có thể sử dụng khi bạn có toàn quyền'
         },

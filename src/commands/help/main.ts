@@ -6,7 +6,6 @@ import BaseInteractionManager from '~/managers/BaseInteractionManager'
 import WrapDataManager from '~/managers/WrapDataManager'
 import TextColorManager from '~/managers/texts/TextColorManager'
 import TextManager from '~/managers/texts/TextManager'
-import setting from '../setting'
 
 export default class HelpCommand extends BaseInteractionManager {
   private _embeds = WrapDataManager.castToType<EmbedBuilder[]>([])
@@ -14,23 +13,18 @@ export default class HelpCommand extends BaseInteractionManager {
   private _pageIndex = WrapDataManager.castToType<number>(0)
 
   protected async main() {
-    await this._addHowToSetting()
+    this._addHowToSetting()
     this._addHowToUse(HowToUseTypes.PC)
     this._addHowToUse(HowToUseTypes.SMART_PHONE)
     await this._paginateLogic()
   }
 
-  private async _addHowToSetting() {
-    const { guild, i18n } = this.commandManager
+  private _addHowToSetting() {
+    const { i18n } = this.commandManager
     const i18nEmbed = i18n.commands.help.embeds[0]
 
-    const commands = await guild?.commands.fetch()
-    console.log(await (await client.guilds.fetch(guild?.id ?? '')).commands.fetch())
-    const command = commands?.find(c => c.name === setting.data.name)
-    const commandId = command?.id ?? 0
-    console.log(command?.id, command?.applicationId)
     const textManager = new TextManager()
-    textManager.addContent(this.format(i18nEmbed.description, commandId))
+    textManager.addContent(i18nEmbed.description)
     textManager.addCodeBlockText(TextColorManager.colorWhite(`➡: ${i18nEmbed.contents[0]}`))
     textManager.addCodeBlockText('')
     textManager.addCodeBlockText(TextColorManager.colorWhite(`🔼: ${i18nEmbed.contents[1]}`))

@@ -6,7 +6,7 @@ const hu = WrapDataManager.toI18n({
       description: 'A BOT használatának módja',
       embeds: [{
         contents: ['Jelenleg kiválasztott nyelv', 'Feljebb mozgatás', 'Lejjebb mozgatás', 'Nyelv aktiválása', 'Nyelv deaktiválása'],
-        description: '**</setting:{0}> A parancs segítségével beállítható**',
+        description: '**`/setting` A parancs segítségével beállítható**',
         footer: {
           text: '※Ezt a parancsot csak teljes jogosultsággal rendelkezők használhatják'
         },

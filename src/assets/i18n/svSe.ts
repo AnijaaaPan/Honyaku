@@ -6,7 +6,7 @@ const svSe = WrapDataManager.toI18n({
       description: 'Hur man använder BOT',
       embeds: [{
         contents: ['För närvarande valt språk', 'Flytta upp', 'Flytta ner', 'Aktivera språk', 'Inaktivera språk'],
-        description: '**</setting:{0}> Kan konfigureras via kommandot**',
+        description: '**`/setting` Kan konfigureras via kommandot**',
         footer: {
           text: '※Detta kommando kan endast användas om du har fulla behörigheter'
         },

@@ -6,7 +6,7 @@ const fi = WrapDataManager.toI18n({
       description: 'BOTin käyttöohjeet',
       embeds: [{
         contents: ['Tällä hetkellä valittu kieli', 'Siirrä ylös', 'Siirrä alas', 'Aktivoi kieli', 'Poista kielen käytöstä'],
-        description: '**</setting:{0}> Asetukset voidaan tehdä komennon avulla**',
+        description: '**`/setting` Asetukset voidaan tehdä komennon avulla**',
         footer: {
           text: '※Tämä komento on käytettävissä vain, jos sinulla on täydet oikeudet'
         },

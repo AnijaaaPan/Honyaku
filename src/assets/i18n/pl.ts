@@ -6,7 +6,7 @@ const pl = WrapDataManager.toI18n({
       description: 'Jak używać BOTA',
       embeds: [{
         contents: ['Aktualnie wybrany język', 'Przesuń w górę', 'Przesuń w dół', 'Aktywuj język', 'Deaktywuj język'],
-        description: '**</setting:{0}> Można ustawić za pomocą polecenia**',
+        description: '**`/setting` Można ustawić za pomocą polecenia**',
         footer: {
           text: '※Ta komenda może być używana tylko w przypadku posiadania pełnych uprawnień'
         },

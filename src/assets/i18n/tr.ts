@@ -6,7 +6,7 @@ const tr = WrapDataManager.toI18n({
       description: 'BOT Nasıl Kullanılır',
       embeds: [{
         contents: ['Şu anda seçili dil', 'Yukarı taşı', 'Aşağı taşı', 'Dili etkinleştir', 'Dili devre dışı bırak'],
-        description: '**</setting:{0}> Komut ile ayarlanabilir**',
+        description: '**`/setting` Komut ile ayarlanabilir**',
         footer: {
           text: '※Bu komut yalnızca tüm yetkilere sahipseniz kullanılabilir'
         },
