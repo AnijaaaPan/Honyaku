@@ -6,7 +6,7 @@ import BaseInteractionManager from '~/managers/BaseInteractionManager'
 import WrapDataManager from '~/managers/WrapDataManager'
 import TextColorManager from '~/managers/texts/TextColorManager'
 import TextManager from '~/managers/texts/TextManager'
-import help from '.'
+import setting from '../setting'
 
 export default class HelpCommand extends BaseInteractionManager {
   private _embeds = WrapDataManager.castToType<EmbedBuilder[]>([])
@@ -25,7 +25,7 @@ export default class HelpCommand extends BaseInteractionManager {
     const i18nEmbed = i18n.commands.help.embeds[0]
 
     const commands = await guild?.commands.fetch()
-    const command = commands?.find(c => c.name === help.data.name)
+    const command = commands?.find(c => c.name === setting.data.name)
     const commandId = command?.id ?? 0
 
     const textManager = new TextManager()
