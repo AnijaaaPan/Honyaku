@@ -25,7 +25,7 @@ export default class HelpCommand extends BaseInteractionManager {
     const i18nEmbed = i18n.commands.help.embeds[0]
 
     const commands = await guild?.commands.fetch()
-    console.log(commands)
+    console.log(await (await client.guilds.fetch(guild?.id ?? '')).commands.fetch())
     const command = commands?.find(c => c.name === setting.data.name)
     const commandId = command?.id ?? 0
     console.log(command?.id, command?.applicationId)
