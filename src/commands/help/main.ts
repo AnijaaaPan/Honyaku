@@ -49,11 +49,11 @@ export default class HelpCommand extends BaseInteractionManager {
 
     const textManager = new TextManager()
     textManager.addContent(`- **${howToUseEmbed.description}**`)
-    textManager.addCodeBlockText(TextColorManager.colorWhite(this.format(howToUseEmbed.contents[0], i18nEmbed.contents[0])))
-    textManager.addCodeBlockText(TextColorManager.colorWhite(this.format(howToUseEmbed.contents[1], i18nEmbed.contents[1])))
-    textManager.addCodeBlockText(TextColorManager.colorWhite(this.format(howToUseEmbed.contents[2], i18nEmbed.contents[1])))
-    textManager.addCodeBlockText(TextColorManager.colorWhite(this.format(howToUseEmbed.contents[3], i18nEmbed.contents[1])))
-    textManager.addCodeBlockText(TextColorManager.colorWhite(howToUseEmbed.contents[4]))
+    textManager.addCodeBlockText(TextColorManager.colorWhite(`1. ${this.format(howToUseEmbed.contents[0], i18nEmbed.contents[0])}`))
+    textManager.addCodeBlockText(TextColorManager.colorWhite(`2. ${this.format(howToUseEmbed.contents[1], i18nEmbed.contents[1])}`))
+    textManager.addCodeBlockText(TextColorManager.colorWhite(`3. ${this.format(howToUseEmbed.contents[2], i18nEmbed.contents[1])}`))
+    textManager.addCodeBlockText(TextColorManager.colorWhite(`4. ${this.format(howToUseEmbed.contents[3], i18nEmbed.contents[1])}`))
+    textManager.addCodeBlockText(TextColorManager.colorWhite(`5. ${howToUseEmbed.contents[4]}`))
 
     const path = this._getGifPath(index)
     const attachment = new AttachmentBuilder(path, { name: 'howToUse.gif' })
