@@ -1,1 +1,0 @@
-export const MAX_DATA_LENGTH = 3

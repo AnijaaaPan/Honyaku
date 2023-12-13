@@ -1,5 +1,4 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder } from 'discord.js'
-import { MAX_DATA_LENGTH } from '~/constants/generals'
 import { CUSTOM_IDS } from '~/constants/ids'
 import { SubscribeTypes } from '~/constants/redis'
 import { Setting } from '~/interfaces/IRedis'
@@ -11,9 +10,10 @@ import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/utils/generals'
 export default class SettingCommand extends BaseInteractionManager {
   private _service = new SettingService(this.commandManager.guildId)
   private _setting!: Setting
-  private _nowIndex = 0
-  private _maxIndex = 0
-  private _countIsSet = 0
+  private _nowIndex = 0 // 現在選択しているINDEX
+  private _languageMaxCount = 0 // BOT側で用意してる言語数
+  private _countIsSet = 0 // 現在設定している言語数
+  private _maxLimit = 0 // 言語を設定できる制限数
 
   protected async main() {
     await this._resetSetting()
@@ -22,11 +22,12 @@ export default class SettingCommand extends BaseInteractionManager {
 
   private async _resetSetting() {
     this._setting = await this._service.initData()
-    this._maxIndex = this._setMaxIndex()
+    this._languageMaxCount = this._setting.languages.length - 1
+    this._maxLimit = this._setMaxLimit()
     this._countIsSet = this._setting.languages.filter(lang => lang.isSet).length
   }
 
-  private _setMaxIndex() {
+  private _setMaxLimit() {
     switch (this._setting.subscribeType) {
       case SubscribeTypes.free:
         return 1
@@ -66,7 +67,7 @@ export default class SettingCommand extends BaseInteractionManager {
       } else if (i.customId === CUSTOM_IDS.DOWN) {
         this._nowIndex++
       } else if (i.customId === CUSTOM_IDS.BOTTOM) {
-        this._nowIndex = this._maxIndex
+        this._nowIndex = this._languageMaxCount
       } else {
         await this._updateIsSet(i)
       }
@@ -79,7 +80,7 @@ export default class SettingCommand extends BaseInteractionManager {
   private async _updateIsSet(i: ButtonInteraction) {
     const customId = i.customId
     if (customId !== CUSTOM_IDS.ON && customId !== CUSTOM_IDS.OFF) return
-    if (customId === CUSTOM_IDS.ON && this._countIsSet >= MAX_DATA_LENGTH) return
+    if (customId === CUSTOM_IDS.ON && this._countIsSet >= this._maxLimit) return
 
     this._setting.languages[this._nowIndex].isSet = customId === CUSTOM_IDS.ON
     await this._service.saveData(this._setting)
@@ -99,10 +100,10 @@ export default class SettingCommand extends BaseInteractionManager {
 
     topButton.setDisabled(this._nowIndex === 0)
     upButton.setDisabled(this._nowIndex === 0)
-    downButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._maxIndex)
-    bottomButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._maxIndex)
+    downButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._languageMaxCount)
+    bottomButton.setDisabled(this._nowIndex !== 0 && this._nowIndex === this._languageMaxCount)
 
-    onButton.setDisabled(this._countIsSet === MAX_DATA_LENGTH)
+    onButton.setDisabled(this._countIsSet === this._maxLimit)
     offButton.setDisabled(this._countIsSet === 0)
 
     const messageOptions = WrapDataManager.toMessageOptions({
@@ -123,7 +124,7 @@ export default class SettingCommand extends BaseInteractionManager {
     embed.setTitle(i18n.commands.language.embed.title)
     embed.setDescription(description)
     embed.setFooter({
-      text: this.format(i18n.commands.language.embed.footer.text, this._countIsSet, MAX_DATA_LENGTH)
+      text: this.format(i18n.commands.language.embed.footer.text, this._countIsSet, this._maxLimit)
     })
     return embed
   }
