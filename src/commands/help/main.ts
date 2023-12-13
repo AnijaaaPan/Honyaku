@@ -27,7 +27,7 @@ export default class HelpCommand extends BaseInteractionManager {
     const commands = await guild?.commands.fetch()
     const command = commands?.find(c => c.name === setting.data.name)
     const commandId = command?.id ?? 0
-
+    console.log(command?.id, command?.applicationId)
     const textManager = new TextManager()
     textManager.addContent(this.format(i18nEmbed.description, commandId))
     textManager.addCodeBlockText(TextColorManager.colorWhite(`➡: ${i18nEmbed.contents[0]}`))
