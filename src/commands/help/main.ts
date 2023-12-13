@@ -6,6 +6,7 @@ import BaseInteractionManager from '~/managers/BaseInteractionManager'
 import WrapDataManager from '~/managers/WrapDataManager'
 import TextColorManager from '~/managers/texts/TextColorManager'
 import TextManager from '~/managers/texts/TextManager'
+import help from '.'
 
 export default class HelpCommand extends BaseInteractionManager {
   private _embeds = WrapDataManager.castToType<EmbedBuilder[]>([])
@@ -13,18 +14,22 @@ export default class HelpCommand extends BaseInteractionManager {
   private _pageIndex = WrapDataManager.castToType<number>(0)
 
   protected async main() {
-    this._addHowToSetting()
+    await this._addHowToSetting()
     this._addHowToUse(HowToUseTypes.PC)
     this._addHowToUse(HowToUseTypes.SMART_PHONE)
     await this._paginateLogic()
   }
 
-  private _addHowToSetting() {
-    const { i18n } = this.commandManager
+  private async _addHowToSetting() {
+    const { guild, i18n } = this.commandManager
     const i18nEmbed = i18n.commands.help.embeds[0]
 
+    const commands = await guild?.commands.fetch()
+    const command = commands?.find(c => c.name === help.data.name)
+    const commandId = command?.id ?? 0
+
     const textManager = new TextManager()
-    textManager.addContent(this.format(i18nEmbed.description, 0))
+    textManager.addContent(this.format(i18nEmbed.description, commandId))
     textManager.addCodeBlockText(TextColorManager.colorWhite(`➡: ${i18nEmbed.contents[0]}`))
     textManager.addCodeBlockText('')
     textManager.addCodeBlockText(TextColorManager.colorWhite(`🔼: ${i18nEmbed.contents[1]}`))
@@ -34,10 +39,8 @@ export default class HelpCommand extends BaseInteractionManager {
     textManager.addCodeBlockText(TextColorManager.colorWhite(`❌: ${i18nEmbed.contents[4]}`))
 
     const embed = new EmbedBuilder()
-    embed.setAuthor({
-      name: i18nEmbed.title,
-      iconURL: client.user?.avatarURL() ?? undefined
-    })
+    embed.setTitle(i18nEmbed.title)
+    embed.setThumbnail(client.user?.avatarURL() ?? null)
     embed.setDescription(`>>> ${textManager.format()}`)
     embed.setFooter(i18nEmbed.footer)
 
@@ -63,6 +66,7 @@ export default class HelpCommand extends BaseInteractionManager {
 
     const embed = new EmbedBuilder()
     embed.setTitle(this.format(howToUseEmbed.title, i18nEmbed.type))
+    embed.setThumbnail(client.user?.avatarURL() ?? null)
     embed.setDescription(`>>> ${textManager.format()}`)
     embed.setImage('attachment://howToUse.gif')
     this._embeds.push(embed)
