@@ -24,7 +24,6 @@ export default class HelpCommand extends BaseInteractionManager {
     const i18nEmbed = i18n.commands.help.embeds[0]
 
     const textManager = new TextManager()
-    textManager.addContent(i18nEmbed.description)
     textManager.addCodeBlockText(TextColorManager.colorWhite(`➡: ${i18nEmbed.contents[0]}`))
     textManager.addCodeBlockText('')
     textManager.addCodeBlockText(TextColorManager.colorWhite(`🔼: ${i18nEmbed.contents[1]}`))
@@ -36,7 +35,7 @@ export default class HelpCommand extends BaseInteractionManager {
     const embed = new EmbedBuilder()
     embed.setTitle(i18nEmbed.title)
     embed.setThumbnail(client.user?.avatarURL() ?? null)
-    embed.setDescription(`>>> ${textManager.format()}`)
+    embed.setDescription(`- ${i18nEmbed.description}\n>>> ${textManager.format()}`)
     embed.setFooter(i18nEmbed.footer)
 
     this._embeds.push(embed)
@@ -48,7 +47,6 @@ export default class HelpCommand extends BaseInteractionManager {
     const i18nEmbed = i18n.commands.help.embeds[index]
 
     const textManager = new TextManager()
-    textManager.addContent(`- **${howToUseEmbed.description}**`)
     textManager.addCodeBlockText(TextColorManager.colorWhite(`1. ${this.format(howToUseEmbed.contents[0], i18nEmbed.contents[0])}`))
     textManager.addCodeBlockText(TextColorManager.colorWhite(`2. ${this.format(howToUseEmbed.contents[1], i18nEmbed.contents[1])}`))
     textManager.addCodeBlockText(TextColorManager.colorWhite(`3. ${this.format(howToUseEmbed.contents[2], i18nEmbed.contents[1])}`))
@@ -62,7 +60,7 @@ export default class HelpCommand extends BaseInteractionManager {
     const embed = new EmbedBuilder()
     embed.setTitle(this.format(howToUseEmbed.title, i18nEmbed.type))
     embed.setThumbnail(client.user?.avatarURL() ?? null)
-    embed.setDescription(`>>> ${textManager.format()}`)
+    embed.setDescription(`- **${howToUseEmbed.description}**\n>>> ${textManager.format()}`)
     embed.setImage('attachment://howToUse.gif')
     this._embeds.push(embed)
   }
