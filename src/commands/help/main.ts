@@ -71,10 +71,10 @@ export default class HelpCommand extends BaseInteractionManager {
   private _getGifPath(index: HowToUseTypeValues) {
     switch (index) {
       case HowToUseTypes.PC:
-        return 'app/images/HowToUsePc.gif'
+        return 'images/HowToUsePc.gif'
 
       case HowToUseTypes.SMART_PHONE:
-        return 'app/images/HowToUseSmartPhone.gif'
+        return 'images/HowToUseSmartPhone.gif'
     }
   }
 
