@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const ja = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'BOTの利用方法',
+      embeds: [{
+        contents: ['現在選択中の言語', '１つ上に移動する', '１つ下に移動する', '言語を有効にする', '言語を無効にする'],
+        description: '**</setting:{0}> コマンドから設定出来ます**',
+        footer: {
+          text: '※このコマンドは全権限を持っている場合のみ使用できます'
+        },
+        title: '言語設定方法:'
+      }, {
+        contents: ['右クリック', 'クリック'],
+        type: 'PC'
+      }, {
+        contents: ['長押し', 'タップ'],
+        type: 'スマホ'
+      }],
+      howToUseEmbed: {
+        contents: ['翻訳したいメッセージを{0}', '`アプリ`を{0}', '`翻訳する`を{0}', '翻訳したい言語を{0}', '翻訳完了'],
+        description: '手順:',
+        title: '利用方法 ({0}):'
+      }
+    },
     language: {
       description: '翻訳する言語を設定します',
       embed: {
@@ -25,7 +47,7 @@ const ja = WrapDataManager.toI18n({
     de: 'ドイツ語',
     el: 'ギリシャ語',
     'en-GB': '英語、イギリス',
-    'en-US': '英語, アメリカ',
+    'en-US': '英語、アメリカ',
     'es-ES': 'スペイン語',
     fi: 'フィンランド語',
     fr: 'フランス語',
@@ -40,7 +62,7 @@ const ja = WrapDataManager.toI18n({
     nl: 'オランダ語',
     no: 'ノルウェー語',
     pl: 'ポーランド語',
-    'pt-BR': 'ポルトガル語, ブラジル',
+    'pt-BR': 'ポルトガル語、ブラジル',
     ro: 'ルーマニア語',
     ru: 'ロシア語',
     'sv-SE': 'スウェーデン語',
@@ -49,7 +71,7 @@ const ja = WrapDataManager.toI18n({
     uk: 'ウクライナ語',
     vi: 'ベトナム語',
     'zh-CN': '中国語',
-    'zh-TW': '台湾, 中国語'
+    'zh-TW': '台湾、中国語'
   }
 })
 

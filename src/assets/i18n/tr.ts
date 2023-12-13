@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const tr = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'BOT Nasıl Kullanılır',
+      embeds: [{
+        contents: ['Şu anda seçili dil', 'Yukarı taşı', 'Aşağı taşı', 'Dili etkinleştir', 'Dili devre dışı bırak'],
+        description: '**</setting:{0}> Komut ile ayarlanabilir**',
+        footer: {
+          text: '※Bu komut yalnızca tüm yetkilere sahipseniz kullanılabilir'
+        },
+        title: 'Dil Ayarlama Yöntemi:'
+      }, {
+        contents: ['Sağ tık', 'Tıkla'],
+        type: 'PC'
+      }, {
+        contents: ['Uzun bas', 'Dokun'],
+        type: 'Akıllı Telefon'
+      }],
+      howToUseEmbed: {
+        contents: ['Çevirmek istediğiniz mesajı seçin {0}', '`Uygulama` için {0}', '`Çevir` için {0}', 'İstediğiniz dili seçin {0}', 'Çeviri tamamlandı'],
+        description: 'Adımlar:',
+        title: 'Kullanım Yöntemi ({0}):'
+      }
+    },
     language: {
       description: 'Çeviri dili ayarlayın',
       embed: {

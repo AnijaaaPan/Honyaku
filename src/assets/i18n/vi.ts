@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const vi = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Cách sử dụng BOT',
+      embeds: [{
+        contents: ['Ngôn ngữ hiện tại được chọn', 'Di chuyển lên', 'Di chuyển xuống', 'Kích hoạt ngôn ngữ', 'Vô hiệu hóa ngôn ngữ'],
+        description: '**</setting:{0}> Có thể được thiết lập thông qua lệnh**',
+        footer: {
+          text: '※Lệnh này chỉ có thể sử dụng khi bạn có toàn quyền'
+        },
+        title: 'Phương pháp thiết lập ngôn ngữ:'
+      }, {
+        contents: ['Nhấp chuột phải', 'Nhấp chuột'],
+        type: 'Máy tính'
+      }, {
+        contents: ['Giữ lâu', 'Chạm'],
+        type: 'Điện thoại thông minh'
+      }],
+      howToUseEmbed: {
+        contents: ['Chọn tin nhắn bạn muốn dịch {0}', '`Ứng dụng` cho {0}', '`Dịch` cho {0}', 'Chọn ngôn ngữ bạn muốn {0}', 'Hoàn thành dịch'],
+        description: 'Các bước:',
+        title: 'Cách sử dụng ({0}):'
+      }
+    },
     language: {
       description: 'Thiết lập ngôn ngữ dịch',
       embed: {

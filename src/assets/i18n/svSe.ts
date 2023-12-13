@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const svSe = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Hur man använder BOT',
+      embeds: [{
+        contents: ['För närvarande valt språk', 'Flytta upp', 'Flytta ner', 'Aktivera språk', 'Inaktivera språk'],
+        description: '**</setting:{0}> Kan konfigureras via kommandot**',
+        footer: {
+          text: '※Detta kommando kan endast användas om du har fulla behörigheter'
+        },
+        title: 'Metod för språkinställning:'
+      }, {
+        contents: ['Högerklick', 'Klick'],
+        type: 'PC'
+      }, {
+        contents: ['Långtryck', 'Tryck'],
+        type: 'Smarttelefon'
+      }],
+      howToUseEmbed: {
+        contents: ['Välj meddelandet du vill översätta {0}', '`App` för {0}', '`Översätt` för {0}', 'Välj önskat språk {0}', 'Översättningen är klar'],
+        description: 'Steg:',
+        title: 'Hur man använder ({0}):'
+      }
+    },
     language: {
       description: 'Ställ in översättningsspråk',
       embed: {

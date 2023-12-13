@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const nl = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Hoe de BOT te gebruiken',
+      embeds: [{
+        contents: ['Momenteel geselecteerde taal', 'Omhoog bewegen', 'Omlaag bewegen', 'Taal activeren', 'Taal deactiveren'],
+        description: '**</setting:{0}> Kan via de opdracht worden ingesteld**',
+        footer: {
+          text: '※Deze opdracht kan alleen worden gebruikt als u volledige rechten hebt'
+        },
+        title: 'Methode voor taalinstelling:'
+      }, {
+        contents: ['Rechtsklik', 'Klik'],
+        type: 'PC'
+      }, {
+        contents: ['Lang indrukken', 'Tikken'],
+        type: 'Smartphone'
+      }],
+      howToUseEmbed: {
+        contents: ['Selecteer het bericht dat u wilt vertalen {0}', '`App` voor {0}', '`Vertalen` voor {0}', 'Selecteer de gewenste taal {0}', 'Vertaling voltooid'],
+        description: 'Stappen:',
+        title: 'Gebruiksaanwijzing ({0}):'
+      }
+    },
     language: {
       description: 'Stel de taal voor vertaling in',
       embed: {

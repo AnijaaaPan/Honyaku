@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const fi = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'BOTin käyttöohjeet',
+      embeds: [{
+        contents: ['Tällä hetkellä valittu kieli', 'Siirrä ylös', 'Siirrä alas', 'Aktivoi kieli', 'Poista kielen käytöstä'],
+        description: '**</setting:{0}> Asetukset voidaan tehdä komennon avulla**',
+        footer: {
+          text: '※Tämä komento on käytettävissä vain, jos sinulla on täydet oikeudet'
+        },
+        title: 'Kielen asetusmenetelmä:'
+      }, {
+        contents: ['Oikea klikkaus', 'Klikkaus'],
+        type: 'PC'
+      }, {
+        contents: ['Pitkä painallus', 'Napautus'],
+        type: 'Puhelin'
+      }],
+      howToUseEmbed: {
+        contents: ['Valitse käännettävä viesti {0}', '`Sovellus` {0}', '`Käännä` {0}', 'Valitse haluamasi kieli {0}', 'Käännös valmis'],
+        description: 'Vaiheet:',
+        title: 'Käyttöohjeet ({0}):'
+      }
+    },
     language: {
       description: 'Aseta käännöskieli',
       embed: {

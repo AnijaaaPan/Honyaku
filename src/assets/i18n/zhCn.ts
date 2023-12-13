@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const zhCn = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: '如何使用BOT',
+      embeds: [{
+        contents: ['当前选择的语言', '向上移动', '向下移动', '激活语言', '停用语言'],
+        description: '**</setting:{0}> 可通过命令设置**',
+        footer: {
+          text: '※此命令仅在您拥有全部权限时可用'
+        },
+        title: '语言设置方法:'
+      }, {
+        contents: ['右键点击', '点击'],
+        type: '电脑'
+      }, {
+        contents: ['长按', '轻触'],
+        type: '智能手机'
+      }],
+      howToUseEmbed: {
+        contents: ['选择您要翻译的消息 {0}', '`应用程序`用于 {0}', '`翻译`用于 {0}', '选择您想要的语言 {0}', '翻译完成'],
+        description: '步骤:',
+        title: '使用方法 ({0}):'
+      }
+    },
     language: {
       description: '设置翻译语言',
       embed: {

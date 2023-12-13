@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const ko = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'BOT 사용 방법',
+      embeds: [{
+        contents: ['현재 선택된 언어', '위로 이동', '아래로 이동', '언어 활성화', '언어 비활성화'],
+        description: '**</setting:{0}> 명령을 통해 설정할 수 있습니다**',
+        footer: {
+          text: '※이 명령은 모든 권한이 있는 경우에만 사용할 수 있습니다'
+        },
+        title: '언어 설정 방법:'
+      }, {
+        contents: ['오른쪽 클릭', '클릭'],
+        type: 'PC'
+      }, {
+        contents: ['길게 누르기', '탭하기'],
+        type: '스마트폰'
+      }],
+      howToUseEmbed: {
+        contents: ['번역하고 싶은 메시지를 선택하세요 {0}', '`앱`을 {0}', '`번역하기`를 {0}', '원하는 언어를 선택하세요 {0}', '번역 완료'],
+        description: '단계:',
+        title: '사용 방법 ({0}):'
+      }
+    },
     language: {
       description: '번역할 언어 설정',
       embed: {

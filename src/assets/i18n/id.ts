@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const id = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Cara Menggunakan BOT',
+      embeds: [{
+        contents: ['Bahasa yang saat ini dipilih', 'Pindah ke atas', 'Pindah ke bawah', 'Aktifkan bahasa', 'Nonaktifkan bahasa'],
+        description: '**</setting:{0}> Dapat diatur melalui perintah**',
+        footer: {
+          text: '※Perintah ini hanya dapat digunakan jika Anda memiliki semua izin'
+        },
+        title: 'Metode Pengaturan Bahasa:'
+      }, {
+        contents: ['Klik kanan', 'Klik'],
+        type: 'PC'
+      }, {
+        contents: ['Tekan lama', 'Ketuk'],
+        type: 'Smartphone'
+      }],
+      howToUseEmbed: {
+        contents: ['Pilih pesan yang ingin Anda terjemahkan {0}', '`Aplikasi` untuk {0}', '`Terjemahkan` untuk {0}', 'Pilih bahasa yang diinginkan {0}', 'Terjemahan selesai'],
+        description: 'Langkah-langkah:',
+        title: 'Cara Menggunakan ({0}):'
+      }
+    },
     language: {
       description: 'Atur bahasa terjemahan',
       embed: {

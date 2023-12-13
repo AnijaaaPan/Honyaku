@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const lt = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Kaip naudotis BOT',
+      embeds: [{
+        contents: ['Dabar pasirinkta kalba', 'Pakilti aukštyn', 'Nusileisti žemyn', 'Įjungti kalbą', 'Išjungti kalbą'],
+        description: '**</setting:{0}> Galima nustatyti naudojant komandą**',
+        footer: {
+          text: '※Šią komandą galima naudoti tik turint visiškas teises'
+        },
+        title: 'Kalbos nustatymo metodas:'
+      }, {
+        contents: ['Dešinysis paspaudimas', 'Paspaudimas'],
+        type: 'PC'
+      }, {
+        contents: ['Ilgai laikyti', 'Palietimas'],
+        type: 'Išmanusis telefonas'
+      }],
+      howToUseEmbed: {
+        contents: ['Pasirinkite pranešimą, kurį norite išversti {0}', '`Programėlė` {0}', '`Versti` {0}', 'Pasirinkite pageidaujamą kalbą {0}', 'Vertimas baigtas'],
+        description: 'Žingsniai:',
+        title: 'Naudojimo instrukcija ({0}):'
+      }
+    },
     language: {
       description: 'Nustatykite vertimo kalbą',
       embed: {

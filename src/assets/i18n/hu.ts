@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const hu = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'A BOT használatának módja',
+      embeds: [{
+        contents: ['Jelenleg kiválasztott nyelv', 'Feljebb mozgatás', 'Lejjebb mozgatás', 'Nyelv aktiválása', 'Nyelv deaktiválása'],
+        description: '**</setting:{0}> A parancs segítségével beállítható**',
+        footer: {
+          text: '※Ezt a parancsot csak teljes jogosultsággal rendelkezők használhatják'
+        },
+        title: 'Nyelvbeállítási módszer:'
+      }, {
+        contents: ['Jobb klikk', 'Klikk'],
+        type: 'PC'
+      }, {
+        contents: ['Hosszan nyomva tartás', 'Érintés'],
+        type: 'Okostelefon'
+      }],
+      howToUseEmbed: {
+        contents: ['Válassza ki a lefordítani kívánt üzenetet {0}', '`Alkalmazás` ehhez {0}', '`Fordítás` ehhez {0}', 'Válassza ki a kívánt nyelvet {0}', 'A fordítás befejeződött'],
+        description: 'Lépések:',
+        title: 'Használati útmutató ({0}):'
+      }
+    },
     language: {
       description: 'Fordítási nyelv beállítása',
       embed: {

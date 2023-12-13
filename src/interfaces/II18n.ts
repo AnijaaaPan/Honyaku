@@ -1,6 +1,31 @@
-
 export interface I18n {
   commands: {
+    help: {
+      description: string
+      howToUseEmbed: {
+        contents: string[]
+        description: string
+        title: string
+      }
+      embeds: [
+        {
+          contents: string[]
+          description: string
+          footer: {
+            text: string
+          }
+          title: string
+        },
+        {
+          contents: string[]
+          type: string
+        },
+        {
+          contents: string[]
+          type: string
+        }
+      ]
+    }
     language: {
       description: string
       embed: {
@@ -17,6 +42,7 @@ export interface I18n {
       undefined: string
     }
   }
+
   localizedNames: {
     bg: string
     cs: string

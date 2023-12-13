@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const ro = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Cum să folosești BOT-ul',
+      embeds: [{
+        contents: ['Limba selectată în prezent', 'Mută în sus', 'Mută în jos', 'Activează limba', 'Dezactivează limba'],
+        description: '**</setting:{0}> Se poate configura prin comandă**',
+        footer: {
+          text: '※Această comandă poate fi utilizată doar dacă aveți permisiuni complete'
+        },
+        title: 'Metoda de setare a limbii:'
+      }, {
+        contents: ['Clic dreapta', 'Clic'],
+        type: 'PC'
+      }, {
+        contents: ['Apăsare lungă', 'Atingere'],
+        type: 'Smartphone'
+      }],
+      howToUseEmbed: {
+        contents: ['Selectează mesajul pe care dorești să-l traduci {0}', '`Aplicație` pentru {0}', '`Traduce` pentru {0}', 'Selectează limba dorită {0}', 'Traducerea completată'],
+        description: 'Pași:',
+        title: 'Cum să folosești ({0}):'
+      }
+    },
     language: {
       description: 'Setați limba de traducere',
       embed: {

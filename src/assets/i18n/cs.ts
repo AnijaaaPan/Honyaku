@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const cs = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Návod k použití BOT',
+      embeds: [{
+        contents: ['Aktuálně vybraný jazyk', 'Přesunout nahoru', 'Přesunout dolů', 'Aktivovat jazyk', 'Deaktivovat jazyk'],
+        description: '**</setting:{0}> Nastavit lze pomocí příkazu**',
+        footer: {
+          text: '※Tento příkaz lze použít pouze s plnými právy'
+        },
+        title: 'Metoda nastavení jazyka:'
+      }, {
+        contents: ['Pravý klik', 'Kliknutí'],
+        type: 'PC'
+      }, {
+        contents: ['Dlouhé stisknutí', 'Klepnutí'],
+        type: 'Mobilní telefon'
+      }],
+      howToUseEmbed: {
+        contents: ['Vyberte zprávu, kterou chcete přeložit {0}', '`Aplikace` pro {0}', '`Přeložit` pro {0}', 'Vyberte požadovaný jazyk {0}', 'Překlad dokončen'],
+        description: 'Kroky:',
+        title: 'Jak používat ({0}):'
+      }
+    },
     language: {
       description: 'Nastavte jazyk pro překlad',
       embed: {

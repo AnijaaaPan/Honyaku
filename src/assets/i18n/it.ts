@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const it = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Come utilizzare il BOT',
+      embeds: [{
+        contents: ['Lingua attualmente selezionata', 'Sposta su', 'Sposta giù', 'Attiva lingua', 'Disattiva lingua'],
+        description: '**</setting:{0}> Può essere impostato tramite il comando**',
+        footer: {
+          text: '※Questo comando può essere utilizzato solo se si hanno pieni diritti'
+        },
+        title: 'Metodo di impostazione della lingua:'
+      }, {
+        contents: ['Clic destro', 'Clic'],
+        type: 'PC'
+      }, {
+        contents: ['Premere a lungo', 'Toccare'],
+        type: 'Smartphone'
+      }],
+      howToUseEmbed: {
+        contents: ['Seleziona il messaggio che vuoi tradurre {0}', '`App` per {0}', '`Traduci` per {0}', 'Seleziona la lingua desiderata {0}', 'Traduzione completata'],
+        description: 'Passaggi:',
+        title: 'Come Utilizzare ({0}):'
+      }
+    },
     language: {
       description: 'Imposta la lingua di traduzione',
       embed: {

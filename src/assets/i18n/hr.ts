@@ -2,6 +2,28 @@ import WrapDataManager from '~/managers/WrapDataManager'
 
 const hr = WrapDataManager.toI18n({
   commands: {
+    help: {
+      description: 'Kako koristiti BOT',
+      embeds: [{
+        contents: ['Trenutno odabrani jezik', 'Pomicanje prema gore', 'Pomicanje prema dolje', 'Aktiviranje jezika', 'Deaktiviranje jezika'],
+        description: '**</setting:{0}> Može se postaviti putem naredbe**',
+        footer: {
+          text: '※Ova naredba može se koristiti samo ako imate pune ovlasti'
+        },
+        title: 'Metoda postavljanja jezika:'
+      }, {
+        contents: ['Desni klik', 'Klik'],
+        type: 'PC'
+      }, {
+        contents: ['Dugi pritisak', 'Dodir'],
+        type: 'Smartphone'
+      }],
+      howToUseEmbed: {
+        contents: ['Odaberite poruku koju želite prevesti {0}', '`Aplikacija` za {0}', '`Prevedi` za {0}', 'Odaberite željeni jezik {0}', 'Prijevod završen'],
+        description: 'Koraci:',
+        title: 'Kako koristiti ({0}):'
+      }
+    },
     language: {
       description: 'Postavite jezik za prijevod',
       embed: {
