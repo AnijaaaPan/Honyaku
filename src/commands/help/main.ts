@@ -33,8 +33,10 @@ export default class HelpCommand extends BaseInteractionManager {
     textManager.addCodeBlockText(TextColorManager.colorWhite(`❌: ${i18nEmbed.contents[4]}`))
 
     const embed = new EmbedBuilder()
-    embed.setTitle(i18nEmbed.title)
-    embed.setThumbnail(client.user?.avatarURL() ?? null)
+    embed.setAuthor({
+      name: i18nEmbed.title,
+      iconURL: client.user?.avatarURL() ?? undefined
+    })
     embed.setDescription(`- ${i18nEmbed.description}\n>>> ${textManager.format()}`)
     embed.setFooter(i18nEmbed.footer)
 
@@ -58,8 +60,10 @@ export default class HelpCommand extends BaseInteractionManager {
     this._attachments.push(attachment)
 
     const embed = new EmbedBuilder()
-    embed.setTitle(this.format(howToUseEmbed.title, i18nEmbed.type))
-    embed.setThumbnail(client.user?.avatarURL() ?? null)
+    embed.setAuthor({
+      name: this.format(howToUseEmbed.title, i18nEmbed.type),
+      iconURL: client.user?.avatarURL() ?? undefined
+    })
     embed.setDescription(`- **${howToUseEmbed.description}**\n>>> ${textManager.format()}`)
     embed.setImage('attachment://howToUse.gif')
     this._embeds.push(embed)
