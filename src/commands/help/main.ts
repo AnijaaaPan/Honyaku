@@ -69,7 +69,7 @@ export default class HelpCommand extends BaseInteractionManager {
   }
 
   private _getGifPath(index: HowToUseTypeValues) {
-    const dirPath = __dirname.replace('commands\\help', '')
+    const dirPath = __dirname.replace('build/commands/help/', '')
     switch (index) {
       case HowToUseTypes.PC:
         return `${dirPath}/images/HowToUsePc.gif`
