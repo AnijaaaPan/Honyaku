@@ -1,6 +1,6 @@
 import { BaseMessageOptions, InteractionReplyOptions } from 'discord.js'
 import { I18n } from '~/interfaces/II18n'
-import { Setting } from '~/interfaces/IRedis'
+import { Language, Setting } from '~/interfaces/IRedis'
 import { CommandPack, ContextPack } from '~/interfaces/commands/IBaseCommand'
 import { TranslationMessage } from '~/interfaces/commands/ITranslation'
 
@@ -30,6 +30,10 @@ export default class WrapDataManager {
   }
 
   public static toSetting(data: Setting) {
+    return data
+  }
+
+  public static toSettingLanguage(data: Language) {
     return data
   }
 

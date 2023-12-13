@@ -1,7 +1,7 @@
 import { TranslationServiceClient } from '@google-cloud/translate'
 import { APIEmbedField, ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, Embed, EmbedBuilder, LocaleString } from 'discord.js'
 import { CustomError } from '~/interfaces/IError'
-import { Setting } from '~/interfaces/IRedis'
+import { Language } from '~/interfaces/IRedis'
 import { TranslationMessage } from '~/interfaces/commands/ITranslation'
 import { Env } from '~/lib/Env'
 import BaseInteractionManager from '~/managers/BaseInteractionManager'
@@ -11,7 +11,7 @@ import { getFlagEmoji } from '~/utils/generals'
 
 export default class TranslationCommand extends BaseInteractionManager {
   private _service = new SettingService(this.commandManager.guildId)
-  private _settings!: Setting[]
+  private _languages!: Language[]
   private _originalMessage!: TranslationMessage
   private _targetLang!: LocaleString
 
@@ -46,9 +46,9 @@ export default class TranslationCommand extends BaseInteractionManager {
 
   private async _guard() {
     const { i18n } = this.commandManager
-    this._settings = await this._service.getDatas()
-    this._settings = this._settings.filter(data => data.isSet)
-    if (this._settings.length === 0) {
+    const setting = await this._service.initData()
+    this._languages = setting.languages.filter(data => data.isSet)
+    if (this._languages.length === 0) {
       throw new CustomError({
         content: i18n.commands.translation.undefined
       })
@@ -67,8 +67,8 @@ export default class TranslationCommand extends BaseInteractionManager {
   }
 
   private _getSettingComponents() {
-    const buttons = this._settings.map((setting) => {
-      const { locale } = setting
+    const buttons = this._languages.map((lang) => {
+      const { locale } = lang
       const customId = `lang-${locale}`
       const flagEmoji = getFlagEmoji(locale)
       const localizedName = this.getLocalizedName(locale)

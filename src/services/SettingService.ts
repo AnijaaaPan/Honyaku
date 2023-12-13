@@ -1,4 +1,5 @@
 import { Locale } from 'discord.js'
+import { SubscribeTypes } from '~/constants/redis'
 import { Setting } from '~/interfaces/IRedis'
 import WrapDataManager from '~/managers/WrapDataManager'
 import { Service } from '.'
@@ -9,24 +10,31 @@ export default class SettingService extends Service<Setting> {
   }
 
   public async initData() {
-    const datas = await this.getDatas()
+    const data = await this.getData()
+    const languages = data?.languages ?? []
+
     const localeValues = Object.values(Locale)
     const newLocaleValues = localeValues.filter(locale => {
-      return !datas.some(data => data.locale === locale)
+      return !languages.some(language => language.locale === locale)
     })
-    
-    if (newLocaleValues.length === 0) return
+    if (newLocaleValues.length === 0) {
+      return WrapDataManager.castToType<Setting>(data)
+    }
 
     const newDatas = newLocaleValues.map(locale => {
-      const setting = WrapDataManager.toSetting({
+      const language = WrapDataManager.toSettingLanguage({
         locale,
         isSet: false
       })
-      return setting
+      return language
     })
 
-    const initDatas = [...datas, ...newDatas]
-    await this.saveData(initDatas)
-    return initDatas
+    languages.push(...newDatas)
+    const setting = WrapDataManager.toSetting({
+      subscribeType: SubscribeTypes.free,
+      languages
+    })
+    await this.saveData(setting)
+    return setting
   }
 }

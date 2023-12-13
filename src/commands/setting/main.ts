@@ -1,6 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, ComponentType, EmbedBuilder } from 'discord.js'
 import { MAX_DATA_LENGTH } from '~/constants/generals'
 import { CUSTOM_IDS } from '~/constants/ids'
+import { SubscribeTypes } from '~/constants/redis'
 import { Setting } from '~/interfaces/IRedis'
 import BaseInteractionManager from '~/managers/BaseInteractionManager'
 import WrapDataManager from '~/managers/WrapDataManager'
@@ -9,24 +10,34 @@ import { getFlagEmoji, getLocaleName, getOnOffEmoji } from '~/utils/generals'
 
 export default class SettingCommand extends BaseInteractionManager {
   private _service = new SettingService(this.commandManager.guildId)
-  private _settings!: Setting[]
+  private _setting!: Setting
   private _nowIndex = 0
   private _maxIndex = 0
   private _countIsSet = 0
 
   protected async main() {
-    await this.resetSetting()
+    await this._resetSetting()
     await this._pushButtonLogic()
   }
 
-  private async resetSetting() {
-    this._settings = await this._service.getDatas()
-    if (this._settings.length === 0) {
-      const initData = await this._service.initData() ?? []
-      this._settings = initData
+  private async _resetSetting() {
+    this._setting = await this._service.initData()
+    this._maxIndex = this._setMaxIndex()
+    this._countIsSet = this._setting.languages.filter(lang => lang.isSet).length
+  }
+
+  private _setMaxIndex() {
+    switch (this._setting.subscribeType) {
+      case SubscribeTypes.free:
+        return 1
+
+      case SubscribeTypes.subscribe:
+        return 3
+
+      case SubscribeTypes.partner:
+      case SubscribeTypes.official:
+        return 5
     }
-    this._maxIndex = this._settings.length - 1
-    this._countIsSet = this._settings.filter(setting => setting.isSet).length
   }
 
   private async _pushButtonLogic() {
@@ -70,9 +81,9 @@ export default class SettingCommand extends BaseInteractionManager {
     if (customId !== CUSTOM_IDS.ON && customId !== CUSTOM_IDS.OFF) return
     if (customId === CUSTOM_IDS.ON && this._countIsSet >= MAX_DATA_LENGTH) return
 
-    this._settings[this._nowIndex].isSet = customId === CUSTOM_IDS.ON
-    await this._service.saveData(this._settings)
-    await this.resetSetting()
+    this._setting.languages[this._nowIndex].isSet = customId === CUSTOM_IDS.ON
+    await this._service.saveData(this._setting)
+    await this._resetSetting()
   }
 
   private _generateMessage() {
@@ -118,8 +129,8 @@ export default class SettingCommand extends BaseInteractionManager {
   }
 
   private _generateDescription() {
-    const contents = this._settings.map((setting, index) => {
-      const { isSet, locale } = setting
+    const contents = this._setting.languages.map((lang, index) => {
+      const { isSet, locale } = lang
       const nowEmoji = this._getNowEmoji(index)
       const onOffEmoji = getOnOffEmoji(isSet)
       const flagEmoji = getFlagEmoji(locale)
