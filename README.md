@@ -2,7 +2,6 @@
 > Discordは公式に31言語をサポートし、それらを相互に翻訳することができます。
 
 - 種類: 自主制作
-- タイトル: honyaku
 - WebSite: https://anijaaa.com/works/honyaku-bot
 - Discord BOT: [招待URL](<https://discord.com/oauth2/authorize?client_id=1176980194913943582&permissions=0&scope=applications.commands%20bot>)
 
