@@ -1,35 +1,29 @@
 {
   "author": "AnijaaaPan",
   "dependencies": {
-    "@google-cloud/translate": "^8.0.2",
-    "cron": "^3.1.6",
-    "discord.js": "^14.14.1",
-    "dotenv": "^16.3.1",
-    "ioredis": "^5.3.2"
+    "@google-cloud/translate": "^8.5.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.4.1"
   },
   "devDependencies": {
-    "@types/cron": "^2.0.1",
     "@types/node-cron": "^3.0.11",
-    "@typescript-eslint/eslint-plugin": "^6.13.0",
-    "@typescript-eslint/parser": "^6.13.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "aicommits": "^1.11.0",
     "eslint": "^8.54.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-n": "^16.3.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "nodemon": "^3.0.1",
-    "npm-check-updates": "^16.14.11",
-    "prettier": "^3.1.0",
-    "ts-node": "^10.9.1",
-    "tsc-alias": "^1.8.8",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.6.0",
+    "nodemon": "^3.1.7",
+    "npm-check-updates": "^16.14.20",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.3.2"
-  },
-  "engines": {
-    "node": "18.x",
-    "npm": ">=8.x"
+    "typescript": "^5.6.3"
   },
   "license": "MIT",
   "main": "build/index.js",
@@ -39,7 +33,7 @@
     "dev": "nodemon",
     "start": "node build/index.js",
     "test": "ts-node -r tsconfig-paths/register src/index.ts",
-    "update-package": "ncu -u && npm install"
+    "update-package": "ncu -u --dep prod --target latest && ncu -u --dep dev --target minor && npm install && npm update"
   },
   "version": "1.0.0"
 }

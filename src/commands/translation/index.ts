@@ -1,10 +1,10 @@
-import { ApplicationCommandType, ContextMenuCommandBuilder } from 'discord.js'
+import { ApplicationIntegrationType, ContextMenuCommandBuilder } from 'discord.js'
 import { instance } from '~/interfaces/commands/IBaseCommand'
 import WrapDataManager from '~/managers/WrapDataManager'
 import TranslationCommand from './main'
 
 const contextMenuCommand = new ContextMenuCommandBuilder()
-  .setType(ApplicationCommandType.Message)
+  .setIntegrationTypes(ApplicationIntegrationType.GuildInstall)
   .setName('translation')
   .setNameLocalizations({
     bg: 'Превод',

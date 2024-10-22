@@ -13,6 +13,6 @@ export default abstract class BaseInteractionManager extends BaseManager {
 
   protected getLocalizedName(locale: LocaleString) {
     const { i18n } = this.commandManager
-    return i18n.localizedNames[locale]
+    return i18n.localizedNames[locale] ?? ''
   }
 }

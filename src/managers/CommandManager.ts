@@ -1,13 +1,13 @@
-import { Guild, GuildMember, Interaction, InteractionReplyOptions, TextBasedChannel, User } from 'discord.js'
+import { Guild, GuildMember, GuildTextBasedChannel, Interaction, InteractionReplyOptions, User } from 'discord.js'
 import { CustomError } from '~/interfaces/IError'
-import { I18n } from '~/interfaces/II18n'
+import I18n from '~/interfaces/II18n'
 import Logger from '~/lib/Logger'
 import { getGuildI18n } from '~/utils/discord'
 import WrapDataManager from './WrapDataManager'
 
 export default class CommandManager {
   public i18n: I18n
-  public channel: TextBasedChannel | null
+  public channel: GuildTextBasedChannel | null
   public channelId: string
   public guild: Guild | null
   public guildId: string
@@ -17,7 +17,7 @@ export default class CommandManager {
 
   private _isError = WrapDataManager.castToType<boolean>(false)
 
-  constructor(public interaction: Interaction) {
+  constructor(public interaction: Interaction<'cached'>) {
     this.i18n = getGuildI18n(interaction.guild)
     this.channel = interaction.channel
     this.channelId = this.channel?.id ?? ''

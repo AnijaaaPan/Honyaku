@@ -155,9 +155,9 @@ export default class TranslationCommand extends BaseInteractionManager {
         embedFields.push(transEmbedField)
       }
       transEmbed.addFields(embedFields)
-
-      messageOptions.embeds?.push(transEmbed)
+      messageOptions.embeds = [...embeds, transEmbed]
     }
+
     return messageOptions
   }
 

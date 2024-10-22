@@ -30,7 +30,7 @@ import uk from '~/assets/i18n/uk'
 import vi from '~/assets/i18n/vi'
 import zhCn from '~/assets/i18n/zhCn'
 import zhTw from '~/assets/i18n/zhTw'
-import { I18n } from '~/interfaces/II18n'
+import I18n from '~/interfaces/II18n'
 
 export function getI18n(local?: Locale) {
   return i18n(local)
@@ -105,7 +105,7 @@ function i18n(local?: Locale): I18n {
       return uk
     case Locale.Vietnamese:
       return vi
-    case undefined:
+    default:
       return enUs
   }
 }

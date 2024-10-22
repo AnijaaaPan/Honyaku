@@ -98,6 +98,9 @@ export function getLocaleName(locale: LocaleString) {
 
     case 'vi':
       return 'Tiếng Việt'
+
+    default:
+      return 'English, UK'
   }
 }
 
@@ -195,5 +198,8 @@ export function getFlagEmoji(locale: LocaleString) {
 
     case 'vi':
       return '🇻🇳'
+
+    default:
+      return '🇺🇸'
   }
 }

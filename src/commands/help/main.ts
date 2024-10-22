@@ -80,7 +80,7 @@ export default class HelpCommand extends BaseInteractionManager {
   }
 
   private async _paginateLogic() {
-    const { channel } = this.commandManager
+    const { channel } = this.commandManager.interaction
 
     const messageOptions = this._generateMessageOption()
     await this.commandManager.updateMessage({

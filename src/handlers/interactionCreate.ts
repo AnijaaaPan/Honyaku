@@ -3,6 +3,7 @@ import commands from '~/commands'
 import CommandManager from '~/managers/CommandManager'
 
 export default async function interactionCreate(interaction: Interaction) {
+  if (!interaction.inCachedGuild() || !interaction.guild) return
   if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) return
 
   const commandManager = new CommandManager(interaction)

@@ -1,5 +1,5 @@
 import { BaseMessageOptions, InteractionReplyOptions } from 'discord.js'
-import { I18n } from '~/interfaces/II18n'
+import I18n from '~/interfaces/II18n'
 import { Language, Setting } from '~/interfaces/IRedis'
 import { CommandPack, ContextPack } from '~/interfaces/commands/IBaseCommand'
 import { TranslationMessage } from '~/interfaces/commands/ITranslation'
